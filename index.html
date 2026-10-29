@@ -1,0 +1,110 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RETROCAOS - Chat Retro</title>
+  <style>
+    body {
+      margin: 0;
+      background: #008080;
+      font-family: Tahoma, Arial, sans-serif;
+      color: #000;
+    }
+    .ventana {
+      max-width: 850px;
+      margin: 35px auto;
+      background: #c0c0c0;
+      border: 3px outset #fff;
+      padding: 5px;
+    }
+    .titulo {
+      background: #000080;
+      color: white;
+      padding: 12px;
+      font-weight: bold;
+      font-size: 24px;
+    }
+    .contenido {
+      padding: 20px;
+    }
+    .panel {
+      background: white;
+      border: 2px inset #eee;
+      padding: 15px;
+      margin: 12px 0;
+    }
+    button {
+      background: #c0c0c0;
+      border: 3px outset white;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 4px;
+    }
+    input {
+      padding: 10px;
+      max-width: 90%;
+    }
+    .salas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="ventana">
+    <div class="titulo">RETROCAOS 💬</div>
+    <div class="contenido">
+      <h2>¡Conéctate como en los viejos tiempos!</h2>
+      <p>Tu punto de encuentro en el mundo retro.</p>
+
+      <div class="panel">
+        <h3>Entrar al chat</h3>
+        <input id="nick" placeholder="Escribe tu apodo">
+        <button onclick="entrar()">Entrar como invitado</button>
+        <p id="mensaje">Bienvenido a RETROCAOS.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Salas de conversación</h3>
+        <div class="salas">
+          <button onclick="sala('General')">🌎 General</button>
+          <button onclick="sala('México')">🇲🇽 México</button>
+          <button onclick="sala('Amistad')">❤️ Amistad</button>
+          <button onclick="sala('Música')">🎵 Música</button>
+        </div>
+        <p id="sala">Selecciona una sala.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Estado del proyecto</h3>
+        <p>Estamos preparando RETROCAOS.</p>
+        <p>Próximamente: usuarios en línea y mensajes privados.</p>
+      </div>
+    </div>
+    <footer>RETROCAOS © 2026 · Chat con estilo clásico</footer>
+  </div>
+
+  <script>
+    function entrar() {
+      const nick = document.getElementById('nick').value.trim();
+      document.getElementById('mensaje').textContent =
+        nick ? '¡Bienvenido, ' + nick + '! La conexión real estará disponible próximamente.' :
+        'Primero escribe tu apodo.';
+    }
+    function sala(nombre) {
+      document.getElementById('sala').textContent =
+        'Has seleccionado la sala ' + nombre + '.';
+    }
+  </script>
+</body>
+</html>
+```
