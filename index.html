@@ -1,106 +1,315 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RETROCAOS | Chat retro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROCAOS | Tu mundo, tu chat</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#008080;font-family:Tahoma,Arial,sans-serif;color:#111;font-size:14px}
-header{background:#000080;color:white;padding:14px 18px;border-bottom:4px ridge #ddd}
-header h1{margin:0;font-size:30px;letter-spacing:2px}
-header p{margin:5px 0 0}
-main{max-width:1050px;margin:22px auto;padding:0 12px}
-.window{background:#c0c0c0;border:3px outset #eee;box-shadow:5px 5px #004b4b;margin-bottom:18px}
-.titlebar{background:linear-gradient(90deg,#000080,#1084d0);color:white;font-weight:bold;padding:8px 10px}
-.content{padding:15px}
-.welcome{text-align:center;padding:12px}
-.welcome h2{margin:5px 0;color:#000080}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.panel{background:#eee;border:2px inset white;padding:12px}
-h3{margin:0 0 12px;color:#000080}
-input{width:100%;padding:10px;border:2px inset #ddd;margin:5px 0 10px;font:inherit}
-button{font:inherit;background:#c0c0c0;border:3px outset white;padding:9px 12px;cursor:pointer}
-button:active{border-style:inset}
-button:hover{background:#ddd}
-.primary{background:#000080;color:white;border:3px outset #777}
-.rooms{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.room{width:100%;text-align:left}
-.status{background:white;border:2px inset #ddd;padding:10px;margin-top:10px;min-height:38px}
-.online{color:#087b20;font-weight:bold}
-.small{font-size:12px;color:#444}
-footer{text-align:center;color:white;padding:10px;font-size:12px}
-@media(max-width:650px){.grid{grid-template-columns:1fr}header h1{font-size:25px}.rooms{grid-template-columns:1fr 1fr}main{margin:12px auto}}
+:root {
+  --azul: #0759a8;
+  --turquesa: #19c6c7;
+  --gris: #c0c0c0;
+  --borde-claro: #ffffff;
+  --borde-oscuro: #555555;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 18px;
+  font-family: Tahoma, Verdana, sans-serif;
+  color: #111;
+  background: #16c6c7;
+  background-image: radial-gradient(#ffffff38 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+button, input, select { font: inherit; }
+button {
+  cursor: pointer;
+  border: 2px solid;
+  border-color: white #555 #555 white;
+  background: #c0c0c0;
+  padding: 8px 12px;
+  color: #111;
+}
+button:active {
+  border-color: #555 white white #555;
+}
+button:hover { background: #d8e9ff; }
+a { color: #003c9b; }
+.page { max-width: 1120px; margin: auto; }
+.top {
+  background: #071d43;
+  color: white;
+  padding: 22px;
+  border: 3px solid white;
+  box-shadow: 5px 5px #333;
+  margin-bottom: 18px;
+}
+.brand {
+  font-size: clamp(32px, 6vw, 56px);
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 3px 3px #078cda;
+}
+.tagline { margin-top: 7px; color: #a8edff; }
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+.nav button { font-weight: bold; }
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr);
+  gap: 16px;
+}
+.window {
+  background: var(--gris);
+  border: 3px solid;
+  border-color: white #444 #444 white;
+  box-shadow: 3px 3px #3338;
+  margin-bottom: 16px;
+  min-width: 0;
+}
+.titlebar {
+  color: white;
+  background: linear-gradient(90deg, #001b75, #159be9);
+  padding: 8px 10px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.titlebar .controls {
+  color: #111;
+  background: #c0c0c0;
+  border: 2px outset white;
+  padding: 0 6px;
+}
+.content { padding: 16px; }
+.welcome {
+  background: #fff;
+  border: 2px inset #ddd;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+h2 { font-size: 19px; margin-top: 0; }
+h3 { margin: 0 0 8px; font-size: 16px; }
+.field { margin: 12px 0; }
+.field label { display: block; font-weight: bold; margin-bottom: 5px; }
+input, select {
+  width: 100%;
+  min-width: 0;
+  padding: 10px;
+  border: 2px inset #ddd;
+  background: white;
+}
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.rooms {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.room {
+  background: #fff;
+  border: 2px outset white;
+  padding: 12px 8px;
+  text-align: center;
+  cursor: pointer;
+}
+.room:hover { background: #e4f7ff; }
+.room .emoji { font-size: 27px; display: block; margin-bottom: 7px; }
+.room strong { display: block; margin-bottom: 5px; }
+.room small { color: #444; }
+.status {
+  background: #e5ffe7;
+  border: 1px solid #77ad7b;
+  padding: 10px;
+  margin-top: 12px;
+}
+.online-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #00a900;
+  margin-right: 5px;
+}
+.feature {
+  padding: 9px 0;
+  border-bottom: 1px dashed #888;
+}
+.feature:last-child { border-bottom: 0; }
+.footer {
+  text-align: center;
+  padding: 18px 8px;
+  color: #07394d;
+  font-size: 12px;
+}
+#notice { min-height: 20px; font-weight: bold; }
+@media (max-width: 700px) {
+  body { padding: 9px; }
+  .grid { grid-template-columns: 1fr; gap: 8px; }
+  .top { padding: 16px; }
+  .content { padding: 12px; }
+  .rooms { gap: 8px; }
+  .nav button { flex: 1 1 40%; }
+}
 </style>
 </head>
 <body>
-<header>
-  <h1>RETROCAOS</h1>
-  <p>Tu punto de encuentro en el mundo retro.</p>
-</header>
+<div class="page">
+  <header class="top">
+    <div class="brand">RETROCAOS<span style="color:#29dce5">.com</span></div>
+    <div class="tagline">Tu mundo, tu chat. Conéctate, conoce y conversa.</div>
+    <nav class="nav">
+      <button onclick="goTo('entrada')">Entrar al chat</button>
+      <button onclick="goTo('salas')">Salas</button>
+      <button onclick="goTo('comunidad')">Comunidad</button>
+      <button onclick="showInfo()">Acerca de</button>
+    </nav>
+  </header>
 
-<main>
-  <section class="window">
-    <div class="titlebar">★ Bienvenido a RETROCAOS</div>
-    <div class="content welcome">
-      <h2>¡Chatea como en los viejos tiempos!</h2>
-      <p>Conoce gente, entra a las salas y revive la época de los chats clásicos.</p>
-      <span class="online">● Comunidad retro</span>
-    </div>
-  </section>
-
-  <div class="grid">
-    <section class="window">
-      <div class="titlebar">▣ Entrada al chat</div>
-      <div class="content">
-        <h3>Entra como invitado</h3>
-        <label for="nick">Tu apodo:</label>
-        <input id="nick" maxlength="20" placeholder="Ej. ChicaRetro2000">
-        <button class="primary" onclick="entrar()">Entrar al chat</button>
-        <div class="status" id="mensaje">Escribe tu apodo para comenzar.</div>
-        <p class="small">La conexión real entre usuarios se agregará después.</p>
-      </div>
-    </section>
-
-    <section class="window">
-      <div class="titlebar">▣ Salas de conversación</div>
-      <div class="content">
-        <h3>Elige tu sala</h3>
-        <div class="rooms">
-          <button class="room" onclick="sala('General')">🌎 General</button>
-          <button class="room" onclick="sala('México')">🇲🇽 México</button>
-          <button class="room" onclick="sala('Amistad')">♥ Amistad</button>
-          <button class="room" onclick="sala('Música')">♫ Música</button>
-          <button class="room" onclick="sala('Videojuegos')">🎮 Videojuegos</button>
-          <button class="room" onclick="sala('Solteros')">♡ Solteros</button>
+  <main class="grid">
+    <section>
+      <div class="window" id="entrada">
+        <div class="titlebar">
+          <span>💬 Bienvenido a RETROCAOS</span>
+          <span class="controls">_ □ ×</span>
         </div>
-        <div class="status" id="sala">Selecciona una sala.</div>
+        <div class="content">
+          <div class="welcome">
+            <h2>¡Vuelve la época dorada del chat!</h2>
+            Entra, elige una sala y empieza a conocer gente.
+            Un lugar con espíritu clásico y una nueva comunidad.
+          </div>
+          <h3>🚪 Entrada de invitados</h3>
+          <div class="field">
+            <label for="nick">¿Cómo te llamas en el chat?</label>
+            <input id="nick" maxlength="20" placeholder="Escribe tu apodo..." autocomplete="nickname">
+          </div>
+          <div class="field">
+            <label for="roomSelect">Elige una sala</label>
+            <select id="roomSelect">
+              <option value="General">🌎 Sala General</option>
+              <option value="México">🇲🇽 México</option>
+              <option value="Amistad">💚 Amistad</option>
+              <option value="Música">🎵 Música</option>
+              <option value="Videojuegos">🎮 Videojuegos</option>
+              <option value="Solteros">💘 Solteros</option>
+            </select>
+          </div>
+          <div class="actions">
+            <button onclick="enterChat()">▶ Entrar como invitado</button>
+            <button onclick="showRegister()">Crear cuenta</button>
+          </div>
+          <div class="status" id="notice" aria-live="polite">
+            <span class="online-dot"></span>Listo para entrar.
+          </div>
+        </div>
+      </div>
+
+      <div class="window" id="salas">
+        <div class="titlebar">
+          <span>🗂️ Explora nuestras salas</span>
+          <span class="controls">_ □ ×</span>
+        </div>
+        <div class="content">
+          <div class="rooms">
+            <div class="room" onclick="chooseRoom('General')">
+              <span class="emoji">🌎</span><strong>General</strong><small>Platica de todo</small>
+            </div>
+            <div class="room" onclick="chooseRoom('México')">
+              <span class="emoji">🇲🇽</span><strong>México</strong><small>¡Qué onda, México!</small>
+            </div>
+            <div class="room" onclick="chooseRoom('Amistad')">
+              <span class="emoji">💚</span><strong>Amistad</strong><small>Conoce personas</small>
+            </div>
+            <div class="room" onclick="chooseRoom('Música')">
+              <span class="emoji">🎵</span><strong>Música</strong><small>Comparte tus gustos</small>
+            </div>
+            <div class="room" onclick="chooseRoom('Videojuegos')">
+              <span class="emoji">🎮</span><strong>Videojuegos</strong><small>Gamers reunidos</small>
+            </div>
+            <div class="room" onclick="chooseRoom('Solteros')">
+              <span class="emoji">💘</span><strong>Solteros</strong><small>Haz nuevas amistades</small>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
-  </div>
 
-  <section class="window">
-    <div class="titlebar">▣ Próximamente</div>
-    <div class="content">
-      <p>☻ Lista de usuarios conectados</p>
-      <p>✉ Mensajes privados estilo MSN Messenger</p>
-      <p>☺ Emoticones clásicos y lista de amigos</p>
-      <p>♟ Registro de cuenta y protección de apodos</p>
-    </div>
-  </section>
-</main>
+    <aside>
+      <div class="window" id="comunidad">
+        <div class="titlebar">
+          <span>👥 La comunidad</span>
+          <span class="controls">_ □ ×</span>
+        </div>
+        <div class="content">
+          <h3><span class="online-dot"></span>¡La puerta está abierta!</h3>
+          <p>RETROCAOS está preparando su comunidad.</p>
+          <div class="feature">🟢 Salas de conversación</div>
+          <div class="feature">💌 Mensajes privados</div>
+          <div class="feature">😊 Emoticones clásicos</div>
+          <div class="feature">⭐ Lista de amigos</div>
+          <div class="feature">🔐 Cuentas registradas</div>
+          <p><small>Estas funciones se irán habilitando por etapas.</small></p>
+        </div>
+      </div>
 
-<footer>RETROCAOS © 2026 · Un clásico que vuelve</footer>
+      <div class="window">
+        <div class="titlebar">
+          <span>🖥️ Estación RETRO</span>
+          <span class="controls">_ □ ×</span>
+        </div>
+        <div class="content">
+          <h3>Conéctate a la nostalgia</h3>
+          <p>Como en los viejos tiempos: un apodo, una sala y una buena conversación.</p>
+          <button onclick="goTo('entrada')">Volver a la entrada ↑</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    RETROCAOS © 2026 · Un chat con espíritu clásico.<br>
+    Proyecto en desarrollo.
+  </footer>
+</div>
 
 <script>
-function entrar(){
-  const nick=document.getElementById('nick').value.trim();
-  document.getElementById('mensaje').textContent=nick
-    ?'¡Hola, '+nick+'! Tu pantalla está lista. La conexión real se agregará después.'
-    :'Primero escribe tu apodo.';
+function goTo(id) {
+  document.getElementById(id).scrollIntoView({behavior:"smooth",block:"start"});
 }
-function sala(nombre){
-  document.getElementById('sala').textContent='Sala seleccionada: '+nombre+'.';
+function chooseRoom(room) {
+  document.getElementById("roomSelect").value = room;
+  goTo("entrada");
+  document.getElementById("notice").textContent = "Sala seleccionada: " + room + ". Escribe tu apodo para continuar.";
+}
+function enterChat() {
+  const nick = document.getElementById("nick").value.trim();
+  const room = document.getElementById("roomSelect").value;
+  const notice = document.getElementById("notice");
+  if (!nick) {
+    notice.textContent = "Escribe un apodo antes de entrar.";
+    document.getElementById("nick").focus();
+    return;
+  }
+  if (nick.length < 2) {
+    notice.textContent = "Tu apodo debe tener al menos 2 caracteres.";
+    document.getElementById("nick").focus();
+    return;
+  }
+  notice.textContent = "¡Hola, " + nick + "! Elegiste la sala " + room + ". La conexión real al chat se habilitará en una siguiente etapa.";
+}
+function showRegister() {
+  document.getElementById("notice").textContent = "El registro de cuentas se habilitará cuando conectemos la base de datos.";
+}
+function showInfo() {
+  alert("RETROCAOS: un proyecto de chat retro inspirado en la época de LatinChat y MSN Messenger.");
 }
 </script>
 </body>
