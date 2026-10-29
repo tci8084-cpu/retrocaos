@@ -3,833 +3,300 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RETROCAOS | Chat retro</title>
-
 <style>
-:root {
-  --blue: #0878d1;
-  --blue-dark: #07569b;
-  --blue-light: #7bd5ff;
-  --glass: rgba(255,255,255,.82);
-  --border: #8bc8ed;
-  --text: #18354d;
-}
-
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: "Trebuchet MS", Arial, sans-serif;
-  color: var(--text);
-  background:
-    radial-gradient(ellipse at top, #e5f9ff 0%, transparent 55%),
-    linear-gradient(135deg, #168bd8, #76d7f5 50%, #d8f5ff);
-}
-
-button, input, select { font: inherit; }
-
-button {
-  cursor: pointer;
-  border: 1px solid #4c9bd0;
-  border-radius: 7px;
-  color: #064879;
-  font-weight: bold;
-  padding: 9px 14px;
-  background: linear-gradient(#ffffff, #d9efff 48%, #9ed7fa);
-  box-shadow: inset 0 1px 0 white, 0 2px 4px #13517b35;
-}
-
-button:hover {
-  filter: brightness(1.06);
-  box-shadow: inset 0 1px 0 white, 0 0 7px #ffffffb0;
-}
-
-button:active { transform: translateY(1px); }
-
-input, select {
-  width: 100%;
-  border: 1px solid #8ab8d5;
-  border-radius: 6px;
-  padding: 10px;
-  background: #fff;
-  color: #18354d;
-  outline-color: #168bd8;
-}
-
-.topbar {
-  padding: 18px 16px;
-  color: white;
-  background: linear-gradient(180deg, #5bc7ff, #1684d4 48%, #0860aa);
-  border-bottom: 2px solid #b9ecff;
-  box-shadow: 0 3px 12px #003d6d45;
-}
-
-.topbar-inner {
-  max-width: 1100px;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.brand {
-  font-size: clamp(25px, 5vw, 39px);
-  font-weight: 900;
-  letter-spacing: 2px;
-  text-shadow: 0 2px 2px #004c8b;
-}
-
-.brand small {
-  display: block;
-  font-size: 11px;
-  letter-spacing: 3px;
-  font-weight: normal;
-}
-
-.status-pill {
-  border: 1px solid #c7efff;
-  background: #ffffff2c;
-  border-radius: 20px;
-  padding: 8px 12px;
-  font-size: 13px;
-}
-
-.page {
-  max-width: 1100px;
-  margin: 22px auto;
-  padding: 0 14px 35px;
-}
-
-.window {
-  border: 1px solid #5a9fcf;
-  border-radius: 10px;
-  overflow: hidden;
-  background: var(--glass);
-  box-shadow: 0 8px 24px #064a7835, inset 0 1px white;
-  backdrop-filter: blur(12px);
-  margin-bottom: 18px;
-}
-
-.titlebar {
-  padding: 11px 14px;
-  color: white;
-  font-weight: bold;
-  background: linear-gradient(#9de4ff, #35a8ed 35%, #0874c4 75%, #075ca8);
-  border-bottom: 1px solid #4e9bd0;
-  text-shadow: 0 1px 2px #064a78;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.window-body { padding: 18px; }
-
-.welcome {
-  display: grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap: 18px;
-  align-items: center;
-}
-
-.welcome h1 {
-  font-size: clamp(25px, 4vw, 36px);
-  margin: 0 0 10px;
-  color: #075c9e;
-}
-
-.welcome p { line-height: 1.6; }
-
-.hero-logo {
-  text-align: center;
-  padding: 20px;
-  border-radius: 14px;
-  background: linear-gradient(145deg, #e7f9ff, #a9e3ff);
-  border: 1px solid white;
-  box-shadow: inset 0 0 20px #ffffffb0;
-}
-
-.hero-logo .bubble {
-  font-size: 55px;
-  filter: drop-shadow(0 4px 3px #367ba555);
-}
-
-.hero-logo strong {
-  display: block;
-  color: #0871b9;
-  font-size: 22px;
-}
-
-.login-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr auto;
-  gap: 10px;
-  align-items: end;
-  margin-top: 18px;
-}
-
-.field label {
-  display: block;
-  font-size: 12px;
-  font-weight: bold;
-  margin: 0 0 6px;
-}
-
-.section-heading {
-  margin: 0 0 12px;
-  color: #075c9e;
-}
-
-.rooms {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.room {
-  text-align: left;
-  padding: 15px;
-  min-height: 96px;
-  border: 1px solid #a3d7f2;
-  border-radius: 10px;
-  background: linear-gradient(145deg, #fff, #d8f2ff);
-  color: #164b70;
-}
-
-.room.active {
-  border: 2px solid #087bc9;
-  background: linear-gradient(#d8f5ff, #9bdcff);
-  box-shadow: 0 0 0 2px #ffffffb0 inset;
-}
-
-.room .emoji {
-  display: block;
-  font-size: 24px;
-  margin-bottom: 6px;
-}
-
-.room strong { display: block; }
-.room small { color: #4c7894; }
-
-.main-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-}
-
-.online-line {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 10px;
-  border-bottom: 1px solid #c8e5f5;
-}
-
-.online-dot {
-  width: 10px;
-  height: 10px;
-  display: inline-block;
-  border-radius: 50%;
-  background: #45bd65;
-  box-shadow: 0 0 4px #45bd65;
-}
-
-.muted {
-  font-size: 12px;
-  color: #5b7d93;
-}
-
-.contact {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 11px 8px;
-  border-bottom: 1px solid #d0e8f5;
-}
-
-.avatar {
-  display: grid;
-  place-items: center;
-  width: 39px;
-  height: 39px;
-  flex-shrink: 0;
-  border: 1px solid #b1d9ed;
-  border-radius: 8px;
-  background: linear-gradient(#fff, #bdeaff);
-  font-size: 22px;
-}
-
-.contact-info { flex: 1; min-width: 0; }
-.contact-info strong { display: block; }
-.contact-info small { color: #5b7d93; }
-
-.chat-layout {
-  display: grid;
-  grid-template-columns: 245px 1fr;
-  gap: 15px;
-}
-
-.chat-sidebar {
-  border: 1px solid #b2d9ed;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #f5fcff;
-}
-
-.sidebar-title {
-  padding: 10px;
-  background: linear-gradient(#e9f9ff, #c5eaff);
-  font-weight: bold;
-  color: #075c9e;
-  border-bottom: 1px solid #b2d9ed;
-}
-
-.chat-contact {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #d5eaf5;
-  cursor: pointer;
-}
-
-.chat-contact:hover, .chat-contact.selected {
-  background: #d8f1ff;
-}
-
-.chat-contact .avatar {
-  width: 34px;
-  height: 34px;
-  font-size: 18px;
-}
-
-.chat-contact-info { flex: 1; min-width: 0; }
-.chat-contact-info strong { display: block; font-size: 13px; }
-.chat-contact-info small { font-size: 11px; color: #638399; }
-
-.conversation {
-  border: 1px solid #8bbfdf;
-  border-radius: 9px;
-  overflow: hidden;
-  background: #fff;
-  min-width: 0;
-}
-
-.conversation-head {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px;
-  background: linear-gradient(#f8fdff, #d8efff);
-  border-bottom: 1px solid #b3d9ed;
-}
-
-.conversation-head .avatar {
-  width: 42px;
-  height: 42px;
-}
-
-.conversation-head strong { display: block; }
-.conversation-head small { color: #4d7e98; }
-
-.messages {
-  height: 255px;
-  overflow-y: auto;
-  padding: 14px;
-  background:
-    linear-gradient(#ffffffed, #ffffffed),
-    repeating-linear-gradient(0deg, #eaf6ff 0, #eaf6ff 1px, white 1px, white 22px);
-}
-
-.message { margin-bottom: 14px; line-height: 1.4; }
-.message .who { font-size: 12px; font-weight: bold; color: #0875bd; }
-.message p { margin: 4px 0 0; overflow-wrap: anywhere; }
-.message.mine .who { color: #26934c; }
-
-.chat-compose {
-  padding: 10px;
-  border-top: 1px solid #c0dfef;
-  background: linear-gradient(#f7fcff, #dcefff);
-}
-
-.chat-compose form {
-  display: flex;
-  gap: 8px;
-}
-
-.chat-compose input { min-width: 0; }
-
-.chat-note {
-  padding: 7px 10px;
-  background: #fff7d7;
-  color: #765d12;
-  font-size: 11px;
-  border-top: 1px solid #f0df9a;
-}
-
-.footer {
-  text-align: center;
-  color: #e9f8ff;
-  font-size: 12px;
-  padding: 12px;
-  text-shadow: 0 1px 2px #075c9e;
-}
-
-.toast {
-  display: none;
-  padding: 10px 12px;
-  margin-top: 10px;
-  background: #fff5cc;
-  color: #6d5410;
-  border: 1px solid #ebd782;
-  border-radius: 7px;
-  font-size: 13px;
-}
-
-.toast.show { display: block; }
-
-@media (max-width: 760px) {
-  .welcome, .main-grid { grid-template-columns: 1fr; }
-  .rooms { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .login-row { grid-template-columns: 1fr; }
-  .chat-layout { grid-template-columns: 1fr; }
-  .chat-sidebar { max-height: 210px; overflow-y: auto; }
-  .messages { height: 230px; }
-}
-
-@media (max-width: 380px) {
-  .rooms { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .room { padding: 10px; }
-  .window-body { padding: 12px; }
-}
+*{box-sizing:border-box}
+:root{--blue:#0878c9;--dark:#075496;--line:#a6d4ee;--text:#23445d}
+body{margin:0;font-family:"Trebuchet MS",Arial,sans-serif;color:var(--text);background:radial-gradient(ellipse at top,#f1fcff,#8cdef9 55%,#1686d0)}
+button,input,select{font:inherit}
+button{cursor:pointer;border:1px solid #76b8df;border-radius:7px;padding:9px 13px;color:#07518b;font-weight:bold;background:linear-gradient(#fff,#d9f0ff 50%,#a2dafa);box-shadow:inset 0 1px white,0 2px 4px #004d7725}
+button:hover{filter:brightness(1.05)}
+input,select{width:100%;padding:10px;border:1px solid #9cc8e0;border-radius:6px;background:white;color:#23445d}
+header{color:white;padding:17px;background:linear-gradient(#75d6ff,#1385d4 48%,#0759a2);border-bottom:2px solid #d7f7ff;box-shadow:0 3px 12px #03416b50}
+.head{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.logo{font-size:34px;font-weight:900;letter-spacing:2px;text-shadow:0 2px 3px #06416f}
+.logo small{display:block;font-size:10px;letter-spacing:3px;font-weight:normal}
+.pill{padding:8px 12px;border:1px solid #d3f5ff;border-radius:20px;background:#ffffff30;font-size:12px}
+main{max-width:1100px;margin:22px auto;padding:0 13px 30px}
+.window{overflow:hidden;margin-bottom:17px;border:1px solid #67a9d5;border-radius:10px;background:#ffffffdc;box-shadow:0 7px 22px #06436a30;backdrop-filter:blur(10px)}
+.title{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 14px;color:white;font-weight:bold;background:linear-gradient(#a5e8ff,#42b3f0 35%,#0875c1 76%,#0758a0);text-shadow:0 1px 2px #03466d;border-bottom:1px solid #64a6d0}
+.body{padding:17px}
+h1{margin:0 0 10px;font-size:clamp(25px,4vw,35px);color:#075b9a}
+h3{margin:0 0 12px;color:#075b9a}
+p{line-height:1.5}
+.muted{font-size:12px;color:#63839a}
+.welcome{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:center}
+.hero{text-align:center;padding:20px;border:1px solid white;border-radius:13px;background:linear-gradient(145deg,#e6faff,#a5e2ff);box-shadow:inset 0 0 18px #fff9}
+.hero .bubble{font-size:52px}
+.hero strong{display:block;font-size:22px;color:#0870b8}
+.formrow{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;margin-top:16px}
+label{display:block;margin-bottom:5px;font-size:12px;font-weight:bold}
+.rooms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.room{text-align:left;min-height:88px;padding:13px;background:linear-gradient(145deg,#fff,#d9f3ff)}
+.room.active{border:2px solid #087bc9;background:linear-gradient(#e2f8ff,#9edcff)}
+.room span{display:block;font-size:23px;margin-bottom:5px}
+.room strong{display:block}
+.room small{font-size:11px;color:#5b7d93}
+.columns{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.online{display:flex;align-items:center;gap:8px;padding:11px;border-bottom:1px solid #cce7f5}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#3fbd65;box-shadow:0 0 4px #3fbd65;flex-shrink:0}
+.dot.away{background:#f0b93f;box-shadow:0 0 4px #f0b93f}
+.dot.busy{background:#e65555;box-shadow:0 0 4px #e65555}
+.contact{display:flex;align-items:center;gap:10px;padding:10px;border-bottom:1px solid #d2e8f4;cursor:pointer}
+.contact:hover,.contact.selected{background:linear-gradient(90deg,#d9f2ff,#f4fcff)}
+.avatar{width:43px;height:43px;display:grid;place-items:center;flex-shrink:0;border:1px solid #a9d4eb;border-radius:9px;background:linear-gradient(#fff,#bdeaff);font-size:24px;box-shadow:inset 0 1px white}
+.details{flex:1;min-width:0}
+.details strong{display:block;overflow-wrap:anywhere}
+.details small{display:flex;align-items:center;gap:5px;margin-top:3px;color:#658399;font-size:11px}
+.contact-actions{display:flex;gap:5px;flex-wrap:wrap}
+.contact-actions button{padding:6px 8px;font-size:11px}
+.chatlayout{display:grid;grid-template-columns:235px minmax(0,1fr);gap:13px}
+.sidebar{overflow:hidden;border:1px solid #b4d9eb;border-radius:8px;background:#f7fcff}
+.sidehead{padding:10px;font-weight:bold;color:#075b9a;background:linear-gradient(#effbff,#cceaff);border-bottom:1px solid #b4d9eb}
+.chatcontact{display:flex;align-items:center;gap:8px;padding:9px;cursor:pointer;border-bottom:1px solid #d5eaf5}
+.chatcontact:hover,.chatcontact.selected{background:#d9f1ff}
+.chatcontact .avatar{width:35px;height:35px;font-size:19px}
+.chatcontact strong{display:block;font-size:12px}
+.chatcontact small{display:block;margin-top:3px;font-size:10px;color:#648399}
+.conversation{min-width:0;overflow:hidden;border:1px solid #8bbfdf;border-radius:9px;background:white}
+.chathead{display:flex;align-items:center;gap:10px;padding:11px;background:linear-gradient(#f9fdff,#d8efff);border-bottom:1px solid #b3d9ed}
+.chathead .avatar{width:42px;height:42px}
+.chathead strong{display:block}
+.chathead small{display:block;margin-top:3px;color:#5c7e94;font-size:11px}
+.messages{height:245px;overflow:auto;padding:13px;background:#fff}
+.message{margin-bottom:13px;overflow-wrap:anywhere}
+.message .who{font-size:12px;font-weight:bold;color:#0875bd}
+.message.mine .who{color:#299650}
+.message p{margin:4px 0 0;line-height:1.4}
+.compose{display:flex;gap:7px;padding:10px;background:linear-gradient(#f8fcff,#dcefff);border-top:1px solid #c0dfef}
+.compose input{min-width:0}
+.chatnote{padding:7px 10px;font-size:10px;background:#fff7d8;color:#795d14;border-top:1px solid #efdf9c}
+.notice{display:none;margin-top:12px;padding:10px;border:1px solid #ebd782;border-radius:7px;background:#fff5cc;color:#6d5410;font-size:13px}
+.notice.show{display:block}
+.footer{text-align:center;color:#e8f8ff;font-size:12px;padding:12px;text-shadow:0 1px 2px #075c9e}
+@media(max-width:720px){.welcome,.columns{grid-template-columns:1fr}.formrow{grid-template-columns:1fr}.chatlayout{grid-template-columns:1fr}.sidebar{max-height:190px;overflow:auto}.rooms{grid-template-columns:repeat(2,minmax(0,1fr))}.messages{height:220px}}
+@media(max-width:370px){.body{padding:11px}.rooms{gap:7px}.room{padding:9px}.contact-actions{display:none}}
 </style>
 </head>
-
 <body>
-<header class="topbar">
-  <div class="topbar-inner">
-    <div class="brand">
-      RETROCAOS
-      <small>EL CHAT DE TODA LA VIDA</small>
-    </div>
-    <div class="status-pill">● Tu portal de chat retro</div>
+<header>
+  <div class="head">
+    <div class="logo">RETROCAOS<small>EL CHAT DE TODA LA VIDA</small></div>
+    <div class="pill">● Tu portal de chat retro</div>
   </div>
 </header>
 
-<main class="page">
-
-  <section class="window">
-    <div class="titlebar">
-      <span>🌐 Bienvenido a RETROCAOS</span>
-      <span>✕</span>
+<main>
+<section class="window">
+  <div class="title"><span>🌐 Bienvenido a RETROCAOS</span><span>✕</span></div>
+  <div class="body">
+    <div class="welcome">
+      <div>
+        <h1>Vuelve a conectarte.</h1>
+        <p>Saluda, conoce gente y conversa como en los viejos tiempos. Elige una sala y empieza a explorar.</p>
+        <p class="muted">Una comunidad con espíritu de los años 2000.</p>
+      </div>
+      <div class="hero"><div class="bubble">💬</div><strong>RETROCAOS</strong><span class="muted">Tu mundo. Tu sala. Tu gente.</span></div>
     </div>
-
-    <div class="window-body">
-      <div class="welcome">
-        <div>
-          <h1>Vuelve a conectarte.</h1>
-          <p>
-            Saluda, conoce gente y conversa como en los viejos tiempos.
-            Entra a una sala y empieza a explorar RETROCAOS.
-          </p>
-          <p class="muted">
-            Una comunidad con espíritu de los años 2000.
-          </p>
-        </div>
-
-        <div class="hero-logo">
-          <div class="bubble">💬</div>
-          <strong>RETROCAOS</strong>
-          <span class="muted">Tu mundo. Tu sala. Tu gente.</span>
-        </div>
-      </div>
-
-      <div class="login-row">
-        <div class="field">
-          <label for="nickname">Tu apodo</label>
-          <input id="nickname" maxlength="24"
-                 placeholder="Ej. AmigoRetro"
-                 autocomplete="off">
-        </div>
-
-        <div class="field">
-          <label for="roomSelect">Elige tu sala</label>
-          <select id="roomSelect">
-            <option value="General">🌎 General</option>
-            <option value="México">🇲🇽 México</option>
-            <option value="Amistad">🤝 Amistad</option>
-            <option value="Música">🎵 Música</option>
-            <option value="Videojuegos">🎮 Videojuegos</option>
-            <option value="Solteros">💘 Solteros</option>
-          </select>
-        </div>
-
-        <button id="enterRoom">Entrar al chat</button>
-      </div>
-
-      <div id="notice" class="toast" role="status"></div>
+    <div class="formrow">
+      <div><label for="nickname">Tu apodo</label><input id="nickname" maxlength="24" placeholder="Ej. AmigoRetro"></div>
+      <div><label for="roomSelect">Elige tu sala</label><select id="roomSelect"><option>General</option><option>México</option><option>Amistad</option><option>Música</option><option>Videojuegos</option><option>Solteros</option></select></div>
+      <button id="enter">Entrar al chat</button>
     </div>
-  </section>
-
-  <section class="window">
-    <div class="titlebar">
-      <span>🗂️ Explora las salas</span>
-      <span>RETROCAOS</span>
-    </div>
-
-    <div class="window-body">
-      <h3 class="section-heading">¿Dónde quieres conversar?</h3>
-
-      <div class="rooms">
-        <button class="room active" data-room="General">
-          <span class="emoji">🌎</span>
-          <strong>General</strong>
-          <small>Conoce gente</small>
-        </button>
-
-        <button class="room" data-room="México">
-          <span class="emoji">🇲🇽</span>
-          <strong>México</strong>
-          <small>Entre mexicanos</small>
-        </button>
-
-        <button class="room" data-room="Amistad">
-          <span class="emoji">🤝</span>
-          <strong>Amistad</strong>
-          <small>Haz nuevas amistades</small>
-        </button>
-
-        <button class="room" data-room="Música">
-          <span class="emoji">🎵</span>
-          <strong>Música</strong>
-          <small>Comparte tus gustos</small>
-        </button>
-
-        <button class="room" data-room="Videojuegos">
-          <span class="emoji">🎮</span>
-          <strong>Videojuegos</strong>
-          <small>Gamers y diversión</small>
-        </button>
-
-        <button class="room" data-room="Solteros">
-          <span class="emoji">💘</span>
-          <strong>Solteros</strong>
-          <small>Conoce personas</small>
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <div class="main-grid">
-    <section class="window">
-      <div class="titlebar">
-        <span>👥 Usuarios conectados</span>
-        <span id="roomLabel">General</span>
-      </div>
-
-      <div class="window-body">
-        <div class="online-line">
-          <span class="online-dot"></span>
-          <strong id="onlineCount">3 usuarios de ejemplo</strong>
-        </div>
-
-        <div id="onlineList">
-          <div class="contact">
-            <div class="avatar">😎</div>
-            <div class="contact-info">
-              <strong>AmigoRetro</strong>
-              <small><span class="online-dot"></span> Disponible</small>
-            </div>
-          </div>
-
-          <div class="contact">
-            <div class="avatar">🎧</div>
-            <div class="contact-info">
-              <strong>PixelGirl</strong>
-              <small><span class="online-dot"></span> Disponible</small>
-            </div>
-          </div>
-
-          <div class="contact">
-            <div class="avatar">🎮</div>
-            <div class="contact-info">
-              <strong>Neo2000</strong>
-              <small><span class="online-dot"></span> Disponible</small>
-            </div>
-          </div>
-        </div>
-
-        <p class="muted">
-          Lista ilustrativa; todavía no representa usuarios reales.
-        </p>
-      </div>
-    </section>
-
-    <section class="window">
-      <div class="titlebar">
-        <span>💙 Tu espacio personal</span>
-        <span>MSN style</span>
-      </div>
-
-      <div class="window-body">
-        <h3 class="section-heading">¡Qué bueno tenerte aquí!</h3>
-        <p>
-          Elige una sala, utiliza tu apodo y descubre la interfaz
-          de conversación privada inspirada en los mensajeros clásicos.
-        </p>
-        <button id="goPrivate">Probar chat privado</button>
-        <p class="muted">
-          Esta versión es una maqueta. El registro y los mensajes reales
-          se conectarán en los siguientes pasos.
-        </p>
-      </div>
-    </section>
+    <div id="notice" class="notice" role="status"></div>
   </div>
+</section>
 
-  <section class="window" id="privateChat">
-    <div class="titlebar">
-      <span>💬 Conversaciones privadas</span>
-      <span>RETROCAOS Messenger</span>
+<section class="window">
+  <div class="title"><span>🗂️ Explora las salas</span><span>RETROCAOS</span></div>
+  <div class="body">
+    <h3>¿Dónde quieres conversar?</h3>
+    <div class="rooms">
+      <button class="room active" data-room="General"><span>🌎</span><strong>General</strong><small>Conoce gente</small></button>
+      <button class="room" data-room="México"><span>🇲🇽</span><strong>México</strong><small>Entre mexicanos</small></button>
+      <button class="room" data-room="Amistad"><span>🤝</span><strong>Amistad</strong><small>Haz nuevas amistades</small></button>
+      <button class="room" data-room="Música"><span>🎵</span><strong>Música</strong><small>Comparte tus gustos</small></button>
+      <button class="room" data-room="Videojuegos"><span>🎮</span><strong>Videojuegos</strong><small>Gamers y diversión</small></button>
+      <button class="room" data-room="Solteros"><span>💘</span><strong>Solteros</strong><small>Conoce personas</small></button>
     </div>
+  </div>
+</section>
 
-    <div class="window-body">
-      <div class="chat-layout">
+<div class="columns">
+<section class="window">
+  <div class="title"><span>👥 Usuarios de la sala</span><span id="roomLabel">General</span></div>
+  <div class="body">
+    <div class="online"><span class="dot"></span><strong id="onlineCount">4 contactos de ejemplo</strong></div>
+    <div id="onlineList"></div>
+    <p class="muted">Contactos ilustrativos; aún no son usuarios reales conectados.</p>
+  </div>
+</section>
 
-        <aside class="chat-sidebar">
-          <div class="sidebar-title">👤 Contactos</div>
+<section class="window">
+  <div class="title"><span>💙 Tu espacio personal</span><span>MSN style</span></div>
+  <div class="body">
+    <h3>Tu lista de contactos</h3>
+    <p>Selecciona un contacto para abrir su conversación privada de demostración.</p>
+    <button id="openChat">Probar chat privado</button>
+    <p class="muted">Más adelante conectaremos los usuarios reales con Supabase.</p>
+  </div>
+</section>
+</div>
 
-          <div class="chat-contact selected" data-contact="AmigoRetro">
-            <div class="avatar">😎</div>
-            <div class="chat-contact-info">
-              <strong>AmigoRetro</strong>
-              <small>● Disponible</small>
-            </div>
-          </div>
-
-          <div class="chat-contact" data-contact="PixelGirl">
-            <div class="avatar">🎧</div>
-            <div class="chat-contact-info">
-              <strong>PixelGirl</strong>
-              <small>● Disponible</small>
-            </div>
-          </div>
-
-          <div class="chat-contact" data-contact="Neo2000">
-            <div class="avatar">🎮</div>
-            <div class="chat-contact-info">
-              <strong>Neo2000</strong>
-              <small>● Disponible</small>
-            </div>
-          </div>
-
-          <div class="chat-contact" data-contact="CyberLuna">
-            <div class="avatar">🌙</div>
-            <div class="chat-contact-info">
-              <strong>CyberLuna</strong>
-              <small>○ Ausente</small>
-            </div>
-          </div>
-        </aside>
-
-        <div class="conversation">
-          <div class="conversation-head">
-            <div class="avatar" id="chatAvatar">😎</div>
-            <div>
-              <strong id="chatName">AmigoRetro</strong>
-              <small>● Conversación privada de demostración</small>
-            </div>
-          </div>
-
-          <div class="messages" id="messages" aria-live="polite">
-            <div class="message">
-              <div class="who">AmigoRetro dice:</div>
-              <p>¡Qué onda! 😎 ¿Ya conociste RETROCAOS?</p>
-            </div>
-
-            <div class="message mine">
-              <div class="who">Tú dices:</div>
-              <p>¡Sí! Parece el MSN de los viejos tiempos. :D</p>
-            </div>
-
-            <div class="message">
-              <div class="who">AmigoRetro dice:</div>
-              <p>¡Exactamente! Nos vemos en la sala General.</p>
-            </div>
-          </div>
-
-          <div class="chat-compose">
-            <form id="messageForm">
-              <input id="messageInput" maxlength="500"
-                     placeholder="Escribe un mensaje..."
-                     autocomplete="off">
-              <button type="submit">Enviar</button>
-            </form>
-          </div>
-
-          <div class="chat-note">
-            Demostración local: los mensajes no se envían a otras personas.
-          </div>
+<section class="window" id="privateChat">
+  <div class="title"><span>💬 Conversaciones privadas</span><span>RETROCAOS Messenger</span></div>
+  <div class="body">
+    <div class="chatlayout">
+      <aside class="sidebar">
+        <div class="sidehead">👤 Contactos</div>
+        <div id="chatContacts"></div>
+      </aside>
+      <div class="conversation">
+        <div class="chathead">
+          <div class="avatar" id="chatAvatar">😎</div>
+          <div><strong id="chatName">AmigoRetro</strong><small id="chatStatus">● Disponible</small></div>
         </div>
-
+        <div class="messages" id="messages" aria-live="polite"></div>
+        <form class="compose" id="messageForm">
+          <input id="messageInput" maxlength="500" placeholder="Escribe un mensaje..." autocomplete="off">
+          <button type="submit">Enviar</button>
+        </form>
+        <div class="chatnote">Demostración local: nadie más recibe estos mensajes.</div>
       </div>
     </div>
-  </section>
-
-  <div class="footer">
-    RETROCAOS © 2026 · Una nueva forma de revivir el chat clásico
   </div>
+</section>
+
+<div class="footer">RETROCAOS © 2026 · Revive el chat clásico</div>
 </main>
 
 <script>
-const roomButtons = document.querySelectorAll(".room");
-const roomSelect = document.getElementById("roomSelect");
-const roomLabel = document.getElementById("roomLabel");
-const nicknameInput = document.getElementById("nickname");
-const notice = document.getElementById("notice");
+const contacts = [
+ {name:"AmigoRetro",emoji:"😎",status:"Disponible",state:"online",room:"General",messages:[["AmigoRetro","¡Qué onda! 😎 ¿Ya conociste RETROCAOS?"],["Tú","¡Sí! Parece el MSN de los viejos tiempos. :D"],["AmigoRetro","¡Exactamente! Nos vemos en la sala General."]]},
+ {name:"PixelGirl",emoji:"🎧",status:"Disponible",state:"online",room:"Música",messages:[["PixelGirl","¡Hola! ¿Qué música estás escuchando?"],["Tú","¡Bienvenida a RETROCAOS! :)"]]},
+ {name:"Neo2000",emoji:"🎮",status:"Ocupado",state:"busy",room:"Videojuegos",messages:[["Neo2000","¿Alguien juega videojuegos clásicos?"],["Tú","¡Aquí estamos los nostálgicos! ;)"]]},
+ {name:"CyberLuna",emoji:"🌙",status:"Ausente",state:"away",room:"Amistad",messages:[["CyberLuna","Hola, nos vemos por aquí."]]}
+];
 
-let currentRoom = "General";
-let currentContact = "AmigoRetro";
+let selectedRoom="General";
+let selectedContact="AmigoRetro";
+const $=id=>document.getElementById(id);
 
-const sampleContacts = {
-  AmigoRetro: { emoji: "😎", messages: [
-    ["AmigoRetro", "¡Qué onda! 😎 ¿Ya conociste RETROCAOS?"],
-    ["Tú", "¡Sí! Parece el MSN de los viejos tiempos. :D"],
-    ["AmigoRetro", "¡Exactamente! Nos vemos en la sala General."]
-  ]},
-  PixelGirl: { emoji: "🎧", messages: [
-    ["PixelGirl", "¡Hola! ¿Qué música estás escuchando?"],
-    ["Tú", "¡Bienvenida a RETROCAOS! :)"]
-  ]},
-  Neo2000: { emoji: "🎮", messages: [
-    ["Neo2000", "¿Alguien juega videojuegos clásicos?"],
-    ["Tú", "¡Aquí estamos los nostálgicos! ;)"]
-  ]},
-  CyberLuna: { emoji: "🌙", messages: [
-    ["CyberLuna", "Hola, nos vemos por aquí."]
-  ]}
-};
+function showNotice(text){$("notice").textContent=text;$("notice").classList.add("show")}
+function dotClass(c){return c.state==="away"?"dot away":c.state==="busy"?"dot busy":"dot"}
 
-function showNotice(message) {
-  notice.textContent = message;
-  notice.classList.add("show");
+function renderOnline(){
+ const list=$("onlineList");
+ list.replaceChildren();
+ const shown=contacts.filter(c=>selectedRoom==="General"||c.room===selectedRoom);
+ $("onlineCount").textContent=shown.length+" contactos de ejemplo";
+ shown.forEach(c=>{
+  const row=document.createElement("div");
+  row.className="contact";
+  const avatar=document.createElement("div");avatar.className="avatar";avatar.textContent=c.emoji;
+  const details=document.createElement("div");details.className="details";
+  const name=document.createElement("strong");name.textContent=c.name;
+  const status=document.createElement("small");
+  const dot=document.createElement("span");dot.className=dotClass(c);
+  status.append(dot,document.createTextNode(c.status));
+  details.append(name,status);
+  const actions=document.createElement("div");actions.className="contact-actions";
+  const btn=document.createElement("button");btn.textContent="Mensaje";
+  btn.addEventListener("click",()=>selectContact(c.name,true));
+  actions.append(btn);
+  row.append(avatar,details,actions);
+  row.addEventListener("click",()=>selectContact(c.name,true));
+  list.append(row);
+ });
+ if(!shown.length){list.textContent="No hay contactos de ejemplo en esta sala."}
 }
 
-function selectRoom(room) {
-  currentRoom = room;
-  roomSelect.value = room;
-  roomLabel.textContent = room;
-
-  roomButtons.forEach(button => {
-    button.classList.toggle("active", button.dataset.room === room);
-  });
+function renderSidebar(){
+ const list=$("chatContacts");list.replaceChildren();
+ contacts.forEach(c=>{
+  const row=document.createElement("div");
+  row.className="chatcontact"+(c.name===selectedContact?" selected":"");
+  const avatar=document.createElement("div");avatar.className="avatar";avatar.textContent=c.emoji;
+  const details=document.createElement("div");
+  const name=document.createElement("strong");name.textContent=c.name;
+  const status=document.createElement("small");
+  const dot=document.createElement("span");dot.className=dotClass(c);
+  status.append(dot,document.createTextNode(" "+c.status));
+  details.append(name,status);row.append(avatar,details);
+  row.addEventListener("click",()=>selectContact(c.name,false));
+  list.append(row);
+ });
 }
 
-roomButtons.forEach(button => {
-  button.addEventListener("click", () => {
-    selectRoom(button.dataset.room);
-    showNotice("Seleccionaste la sala " + currentRoom +
-      ". La conexión real se agregará después.");
-  });
-});
-
-roomSelect.addEventListener("change", () => {
-  selectRoom(roomSelect.value);
-});
-
-document.getElementById("enterRoom").addEventListener("click", () => {
-  const nickname = nicknameInput.value.trim();
-
-  if (!nickname) {
-    showNotice("Primero escribe el apodo que quieres utilizar.");
-    nicknameInput.focus();
-    return;
-  }
-
-  selectRoom(roomSelect.value);
-  showNotice("¡Hola, " + nickname + "! Elegiste la sala " +
-    currentRoom + ". La entrada es una demostración local por ahora.");
-});
-
-document.getElementById("goPrivate").addEventListener("click", () => {
-  document.getElementById("privateChat").scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-  document.getElementById("messageInput").focus();
-});
-
-function renderConversation(contact) {
-  currentContact = contact;
-  const data = sampleContacts[contact];
-
-  document.getElementById("chatName").textContent = contact;
-  document.getElementById("chatAvatar").textContent = data.emoji;
-
-  document.querySelectorAll(".chat-contact").forEach(item => {
-    item.classList.toggle("selected", item.dataset.contact === contact);
-  });
-
-  const messages = document.getElementById("messages");
-  messages.replaceChildren();
-
-  data.messages.forEach(([sender, text]) => {
-    addMessage(sender, text, false);
-  });
+function convertEmoticons(text){
+ return text.replace(/:\)/g,"🙂").replace(/:\(/g,"🙁").replace(/;\)/g,"😉").replace(/:D/gi,"😃");
 }
 
-document.querySelectorAll(".chat-contact").forEach(item => {
-  item.addEventListener("click", () => {
-    renderConversation(item.dataset.contact);
-  });
-});
-
-function convertEmoticons(text) {
-  return text
-    .replace(/:\)/g, "🙂")
-    .replace(/:\(/g, "🙁")
-    .replace(/;\)/g, "😉")
-    .replace(/:D/gi, "😃");
+function renderMessages(){
+ const c=contacts.find(x=>x.name===selectedContact);
+ $("chatName").textContent=c.name;
+ $("chatAvatar").textContent=c.emoji;
+ $("chatStatus").textContent="● "+c.status;
+ const box=$("messages");box.replaceChildren();
+ c.messages.forEach(([sender,text])=>addMessageElement(sender,text,box));
+ box.scrollTop=box.scrollHeight;
+ renderSidebar();
 }
 
-function addMessage(sender, text, save = true) {
-  const messages = document.getElementById("messages");
-  const message = document.createElement("div");
-  message.className = "message" + (sender === "Tú" ? " mine" : "");
-
-  const who = document.createElement("div");
-  who.className = "who";
-  who.textContent = sender === "Tú" ? "Tú dices:" : sender + " dice:";
-
-  const body = document.createElement("p");
-  body.textContent = convertEmoticons(text);
-
-  message.append(who, body);
-  messages.appendChild(message);
-  messages.scrollTop = messages.scrollHeight;
-
-  if (save) {
-    sampleContacts[currentContact].messages.push([sender, text]);
-  }
+function addMessageElement(sender,text,box){
+ const msg=document.createElement("div");
+ msg.className="message"+(sender==="Tú"?" mine":"");
+ const who=document.createElement("div");who.className="who";
+ who.textContent=sender==="Tú"?"Tú dices:":sender+" dice:";
+ const body=document.createElement("p");body.textContent=convertEmoticons(text);
+ msg.append(who,body);box.append(msg);
 }
 
-document.getElementById("messageForm").addEventListener("submit", event => {
-  event.preventDefault();
+function selectContact(name,scroll){
+ selectedContact=name;renderMessages();
+ if(scroll)$("privateChat").scrollIntoView({behavior:"smooth",block:"start"});
+}
 
-  const input = document.getElementById("messageInput");
-  const text = input.value.trim();
+document.querySelectorAll(".room").forEach(btn=>btn.addEventListener("click",()=>{
+ selectedRoom=btn.dataset.room;
+ $("roomSelect").value=selectedRoom;
+ $("roomLabel").textContent=selectedRoom;
+ document.querySelectorAll(".room").forEach(b=>b.classList.toggle("active",b===btn));
+ renderOnline();
+ showNotice("Sala seleccionada: "+selectedRoom+". La conexión real se agregará después.");
+}));
 
-  if (!text) return;
-
-  addMessage("Tú", text);
-  input.value = "";
-  input.focus();
+$("roomSelect").addEventListener("change",()=>{
+ selectedRoom=$("roomSelect").value;
+ $("roomLabel").textContent=selectedRoom;
+ document.querySelectorAll(".room").forEach(b=>b.classList.toggle("active",b.dataset.room===selectedRoom));
+ renderOnline();
 });
 
-selectRoom("General");
+$("enter").addEventListener("click",()=>{
+ const nick=$("nickname").value.trim();
+ if(!nick){showNotice("Escribe primero el apodo que quieres utilizar.");$("nickname").focus();return}
+ showNotice("¡Hola, "+nick+"! Elegiste la sala "+selectedRoom+". Esta entrada todavía es una demostración.");
+});
+
+$("openChat").addEventListener("click",()=>{
+ $("privateChat").scrollIntoView({behavior:"smooth",block:"start"});
+ $("messageInput").focus();
+});
+
+$("messageForm").addEventListener("submit",event=>{
+ event.preventDefault();
+ const input=$("messageInput"),text=input.value.trim();
+ if(!text)return;
+ const c=contacts.find(x=>x.name===selectedContact);
+ c.messages.push(["Tú",text]);
+ renderMessages();input.value="";input.focus();
+});
+
+renderOnline();
+renderSidebar();
+renderMessages();
 </script>
 </body>
 </html>
