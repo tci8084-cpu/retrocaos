@@ -1,110 +1,107 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RETROCAOS - Chat Retro</title>
-  <style>
-    body {
-      margin: 0;
-      background: #008080;
-      font-family: Tahoma, Arial, sans-serif;
-      color: #000;
-    }
-    .ventana {
-      max-width: 850px;
-      margin: 35px auto;
-      background: #c0c0c0;
-      border: 3px outset #fff;
-      padding: 5px;
-    }
-    .titulo {
-      background: #000080;
-      color: white;
-      padding: 12px;
-      font-weight: bold;
-      font-size: 24px;
-    }
-    .contenido {
-      padding: 20px;
-    }
-    .panel {
-      background: white;
-      border: 2px inset #eee;
-      padding: 15px;
-      margin: 12px 0;
-    }
-    button {
-      background: #c0c0c0;
-      border: 3px outset white;
-      padding: 10px 16px;
-      cursor: pointer;
-      font-weight: bold;
-      margin: 4px;
-    }
-    input {
-      padding: 10px;
-      max-width: 90%;
-    }
-    .salas {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    footer {
-      text-align: center;
-      padding: 15px;
-      font-size: 12px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RETROCAOS | Chat retro</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#008080;font-family:Tahoma,Arial,sans-serif;color:#111;font-size:14px}
+header{background:#000080;color:white;padding:14px 18px;border-bottom:4px ridge #ddd}
+header h1{margin:0;font-size:30px;letter-spacing:2px}
+header p{margin:5px 0 0}
+main{max-width:1050px;margin:22px auto;padding:0 12px}
+.window{background:#c0c0c0;border:3px outset #eee;box-shadow:5px 5px #004b4b;margin-bottom:18px}
+.titlebar{background:linear-gradient(90deg,#000080,#1084d0);color:white;font-weight:bold;padding:8px 10px}
+.content{padding:15px}
+.welcome{text-align:center;padding:12px}
+.welcome h2{margin:5px 0;color:#000080}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.panel{background:#eee;border:2px inset white;padding:12px}
+h3{margin:0 0 12px;color:#000080}
+input{width:100%;padding:10px;border:2px inset #ddd;margin:5px 0 10px;font:inherit}
+button{font:inherit;background:#c0c0c0;border:3px outset white;padding:9px 12px;cursor:pointer}
+button:active{border-style:inset}
+button:hover{background:#ddd}
+.primary{background:#000080;color:white;border:3px outset #777}
+.rooms{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.room{width:100%;text-align:left}
+.status{background:white;border:2px inset #ddd;padding:10px;margin-top:10px;min-height:38px}
+.online{color:#087b20;font-weight:bold}
+.small{font-size:12px;color:#444}
+footer{text-align:center;color:white;padding:10px;font-size:12px}
+@media(max-width:650px){.grid{grid-template-columns:1fr}header h1{font-size:25px}.rooms{grid-template-columns:1fr 1fr}main{margin:12px auto}}
+</style>
 </head>
 <body>
-  <div class="ventana">
-    <div class="titulo">RETROCAOS 💬</div>
-    <div class="contenido">
-      <h2>¡Conéctate como en los viejos tiempos!</h2>
-      <p>Tu punto de encuentro en el mundo retro.</p>
+<header>
+  <h1>RETROCAOS</h1>
+  <p>Tu punto de encuentro en el mundo retro.</p>
+</header>
 
-      <div class="panel">
-        <h3>Entrar al chat</h3>
-        <input id="nick" placeholder="Escribe tu apodo">
-        <button onclick="entrar()">Entrar como invitado</button>
-        <p id="mensaje">Bienvenido a RETROCAOS.</p>
-      </div>
-
-      <div class="panel">
-        <h3>Salas de conversación</h3>
-        <div class="salas">
-          <button onclick="sala('General')">🌎 General</button>
-          <button onclick="sala('México')">🇲🇽 México</button>
-          <button onclick="sala('Amistad')">❤️ Amistad</button>
-          <button onclick="sala('Música')">🎵 Música</button>
-        </div>
-        <p id="sala">Selecciona una sala.</p>
-      </div>
-
-      <div class="panel">
-        <h3>Estado del proyecto</h3>
-        <p>Estamos preparando RETROCAOS.</p>
-        <p>Próximamente: usuarios en línea y mensajes privados.</p>
-      </div>
+<main>
+  <section class="window">
+    <div class="titlebar">★ Bienvenido a RETROCAOS</div>
+    <div class="content welcome">
+      <h2>¡Chatea como en los viejos tiempos!</h2>
+      <p>Conoce gente, entra a las salas y revive la época de los chats clásicos.</p>
+      <span class="online">● Comunidad retro</span>
     </div>
-    <footer>RETROCAOS © 2026 · Chat con estilo clásico</footer>
+  </section>
+
+  <div class="grid">
+    <section class="window">
+      <div class="titlebar">▣ Entrada al chat</div>
+      <div class="content">
+        <h3>Entra como invitado</h3>
+        <label for="nick">Tu apodo:</label>
+        <input id="nick" maxlength="20" placeholder="Ej. ChicaRetro2000">
+        <button class="primary" onclick="entrar()">Entrar al chat</button>
+        <div class="status" id="mensaje">Escribe tu apodo para comenzar.</div>
+        <p class="small">La conexión real entre usuarios se agregará después.</p>
+      </div>
+    </section>
+
+    <section class="window">
+      <div class="titlebar">▣ Salas de conversación</div>
+      <div class="content">
+        <h3>Elige tu sala</h3>
+        <div class="rooms">
+          <button class="room" onclick="sala('General')">🌎 General</button>
+          <button class="room" onclick="sala('México')">🇲🇽 México</button>
+          <button class="room" onclick="sala('Amistad')">♥ Amistad</button>
+          <button class="room" onclick="sala('Música')">♫ Música</button>
+          <button class="room" onclick="sala('Videojuegos')">🎮 Videojuegos</button>
+          <button class="room" onclick="sala('Solteros')">♡ Solteros</button>
+        </div>
+        <div class="status" id="sala">Selecciona una sala.</div>
+      </div>
+    </section>
   </div>
 
-  <script>
-    function entrar() {
-      const nick = document.getElementById('nick').value.trim();
-      document.getElementById('mensaje').textContent =
-        nick ? '¡Bienvenido, ' + nick + '! La conexión real estará disponible próximamente.' :
-        'Primero escribe tu apodo.';
-    }
-    function sala(nombre) {
-      document.getElementById('sala').textContent =
-        'Has seleccionado la sala ' + nombre + '.';
-    }
-  </script>
+  <section class="window">
+    <div class="titlebar">▣ Próximamente</div>
+    <div class="content">
+      <p>☻ Lista de usuarios conectados</p>
+      <p>✉ Mensajes privados estilo MSN Messenger</p>
+      <p>☺ Emoticones clásicos y lista de amigos</p>
+      <p>♟ Registro de cuenta y protección de apodos</p>
+    </div>
+  </section>
+</main>
+
+<footer>RETROCAOS © 2026 · Un clásico que vuelve</footer>
+
+<script>
+function entrar(){
+  const nick=document.getElementById('nick').value.trim();
+  document.getElementById('mensaje').textContent=nick
+    ?'¡Hola, '+nick+'! Tu pantalla está lista. La conexión real se agregará después.'
+    :'Primero escribe tu apodo.';
+}
+function sala(nombre){
+  document.getElementById('sala').textContent='Sala seleccionada: '+nombre+'.';
+}
+</script>
 </body>
 </html>
-```
