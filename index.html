@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="es">
 <head>
@@ -75,78 +74,83 @@ input.message-input{flex:1}
 
 <header class="top">
   <div>
-    <img class="brand" src="retrocaos-logo.png" alt="RETROCAOS - El chat de toda la vida" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <img class="brand" src="retrocaos-logo.png" alt="RETROCAOS - El chat de toda la vida"
+    onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
     <div class="brand-fallback">RETROCAOS</div>
   </div>
   <div class="actions">
     <button class="btn" onclick="alert('El registro se activará al conectar Supabase.')">Crear cuenta</button>
-    <button class="btn primary" onclick="showHome();document.getElementById('roomDirectory').scrollIntoView({behavior:'smooth'})">Entrar al chat</button>
+    <button class="btn primary" onclick="showHome()">Entrar al chat</button>
   </div>
 </header>
 
 <section class="intro">
-<h1>¡Volvió el chat de toda la vida!</h1>
-<p>Entra, elige una categoría, descubre sus sub salas y encuentra tu conversación.</p>
+  <h1>¡Volvió el chat de toda la vida!</h1>
+  <p>Entra, elige una categoría, descubre sus sub salas y encuentra tu conversación.</p>
 </section>
 
 <section class="stats">
-<div class="stat"><strong>—</strong><span>Visitas acumuladas</span></div>
-<div class="stat"><strong>—</strong><span>Conectados ahora</span></div>
-<div class="stat"><strong>—</strong><span>Récord simultáneo</span></div>
+  <div class="stat"><strong>—</strong><span>Visitas acumuladas</span></div>
+  <div class="stat"><strong>—</strong><span>Conectados ahora</span></div>
+  <div class="stat"><strong>—</strong><span>Récord simultáneo</span></div>
 </section>
 
 <section id="homeView" class="view active">
-<h2 class="section-title">Directorio de categorías</h2>
-<div id="roomDirectory"></div>
+  <h2 class="section-title">Directorio de categorías</h2>
+  <div id="roomDirectory"></div>
 </section>
 
 <section id="subView" class="view">
-<button class="btn back" onclick="showHome()">← Volver al inicio</button>
-<div class="crumb">RETROCAOS / <span id="crumbCategory"></span></div>
-<div class="sub-intro">
-<h2 id="subTitle"></h2>
-<p>Selecciona una sub sala para entrar a conversar.</p>
-</div>
-<div id="subDirectory"></div>
+  <button class="btn back" onclick="showHome()">← Volver al inicio</button>
+  <div class="crumb">RETROCAOS / <span id="crumbCategory"></span></div>
+  <div class="sub-intro">
+    <h2 id="subTitle"></h2>
+    <p>Selecciona una sub sala para entrar a conversar.</p>
+  </div>
+  <div id="subDirectory"></div>
 </section>
 
 <section id="chatView" class="view">
-<button class="btn back" onclick="backToSubs()">← Volver a las sub salas</button>
-<div class="crumb">RETROCAOS / <span id="chatCrumbCategory"></span> / <span id="chatCrumbRoom"></span></div>
-<div class="sub-intro">
-<h2 id="chatTitle"># Sala</h2>
-<p>Bienvenido. Esta es la pantalla individual de la sala.</p>
-</div>
+  <button class="btn back" onclick="backToSubs()">← Volver a las sub salas</button>
+  <div class="crumb">RETROCAOS / <span id="chatCrumbCategory"></span> / <span id="chatCrumbRoom"></span></div>
+  <div class="sub-intro">
+    <h2 id="chatTitle"># Sala</h2>
+    <p>Bienvenido. Esta es la pantalla individual de la sala.</p>
+  </div>
 
-<div class="columns">
-<section class="panel">
-<div class="panel-head">
-<span id="roomHeader"># Sala</span>
-<span>● Sala de demostración</span>
-</div>
-<div class="chat-log" id="chatLog">
-<div class="msg"><span class="time">Ahora</span><span class="nick">RETROCAOS:</span> ¡Bienvenido! Inicia la conversación.</div>
-</div>
-<form class="send" id="sendForm">
-<input class="nick-input" id="nick" maxlength="22" placeholder="Tu apodo" aria-label="Tu apodo">
-<input class="message-input" id="message" maxlength="400" placeholder="Escribe un mensaje..." aria-label="Mensaje" required>
-<button class="btn primary" type="submit">Enviar</button>
-</form>
-</section>
+  <div class="columns">
+    <section class="panel">
+      <div class="panel-head">
+        <span id="roomHeader"># Sala</span>
+        <span>● Sala de demostración</span>
+      </div>
+      <div class="chat-log" id="chatLog">
+        <div class="msg">
+          <span class="time">Ahora</span>
+          <span class="nick">RETROCAOS:</span>
+          ¡Bienvenido! Inicia la conversación.
+        </div>
+      </div>
+      <form class="send" id="sendForm">
+        <input class="nick-input" id="nick" maxlength="22" placeholder="Tu apodo" aria-label="Tu apodo">
+        <input class="message-input" id="message" maxlength="400" placeholder="Escribe un mensaje..." aria-label="Mensaje" required>
+        <button class="btn primary" type="submit">Enviar</button>
+      </form>
+    </section>
 
-<aside class="panel">
-<div class="panel-head">Usuarios en la sala</div>
-<div class="user-list">
-<div class="user"><span class="online-dot"></span>RetroFan <small>(ejemplo)</small></div>
-<div class="user"><span class="online-dot"></span>Luna2000 <small>(ejemplo)</small></div>
-<div class="user"><span class="online-dot"></span>Pixel <small>(ejemplo)</small></div>
-</div>
-</aside>
-</div>
+    <aside class="panel">
+      <div class="panel-head">Usuarios en la sala</div>
+      <div class="user-list">
+        <div class="user"><span class="online-dot"></span>RetroFan <small>(ejemplo)</small></div>
+        <div class="user"><span class="online-dot"></span>Luna2000 <small>(ejemplo)</small></div>
+        <div class="user"><span class="online-dot"></span>Pixel <small>(ejemplo)</small></div>
+      </div>
+    </aside>
+  </div>
 </section>
 
 <div class="notice">
-Prototipo visual: mensajes, usuarios y contadores todavía son demostrativos y no se comparten entre visitantes. Para hacerlos reales conectaremos registro, salas y chat a Supabase.
+  Prototipo visual: mensajes, usuarios y contadores todavía son demostrativos y no se comparten entre visitantes. Para hacerlos reales conectaremos registro, salas y chat a Supabase.
 </div>
 
 <footer class="footer">RETROCAOS · El chat de toda la vida · Comunidad abierta</footer>
@@ -166,125 +170,139 @@ let currentCategory=null,currentRoom=null;
 const $=id=>document.getElementById(id);
 
 function makeButton(name,small,fn){
-const b=document.createElement("button");
-b.className="room";
-const label=document.createElement("span");
-label.textContent=name;
-const sub=document.createElement("small");
-sub.textContent=small;
-label.appendChild(sub);
-const arrow=document.createElement("span");
-arrow.className="count";
-arrow.textContent="›";
-b.append(label,arrow);
-b.addEventListener("click",fn);
-return b;
+  const b=document.createElement("button");
+  b.className="room";
+  const label=document.createElement("span");
+  label.textContent=name;
+  const sub=document.createElement("small");
+  sub.textContent=small;
+  label.appendChild(sub);
+  const arrow=document.createElement("span");
+  arrow.className="count";
+  arrow.textContent="›";
+  b.append(label,arrow);
+  b.addEventListener("click",fn);
+  return b;
 }
 
 function renderCategories(){
-const root=$("roomDirectory");
-categories.forEach(cat=>{
-const section=document.createElement("section");
-section.className="category";
-const h=document.createElement("h3");
-h.textContent=cat.title;
-const grid=document.createElement("div");
-grid.className="rooms";
-cat.rooms.forEach(room=>grid.appendChild(makeButton(room,"Ver sub salas",()=>openCategory(cat,room))));
-section.append(h,grid);
-root.appendChild(section);
-});
+  const root=$("roomDirectory");
+  categories.forEach(cat=>{
+    const section=document.createElement("section");
+    section.className="category";
+    const h=document.createElement("h3");
+    h.textContent=cat.title;
+    const grid=document.createElement("div");
+    grid.className="rooms";
+    cat.rooms.forEach(room=>{
+      grid.appendChild(makeButton(room,"Ver sub salas",()=>openCategory(cat,room)));
+    });
+    section.append(h,grid);
+    root.appendChild(section);
+  });
 }
 
 function openCategory(cat,room){
-currentCategory=cat;
-currentRoom=room;
-$("subTitle").textContent=room;
-$("crumbCategory").textContent=room;
-const root=$("subDirectory");
-root.innerHTML="";
-let subs=getSubs(room);
-const grid=document.createElement("div");
-grid.className="rooms";
-subs.forEach(sub=>grid.appendChild(makeButton(sub,"Entrar al chat",()=>openChat(sub))));
-root.appendChild(grid);
-showView("subView");
+  currentCategory=cat;
+  currentRoom=room;
+  $("subTitle").textContent=room;
+  $("crumbCategory").textContent=room;
+  const root=$("subDirectory");
+  root.innerHTML="";
+  const subs=getSubs(room);
+  const grid=document.createElement("div");
+  grid.className="rooms";
+  subs.forEach(sub=>{
+    grid.appendChild(makeButton(sub,"Entrar al chat",()=>openChat(sub)));
+  });
+  root.appendChild(grid);
+  showView("subView");
 }
 
 function getSubs(room){
-const map={
-"México":["General México","Monterrey","CDMX","Guadalajara","Tijuana","Puebla","Veracruz","Norte","Sur"],
-"Argentina":["General Argentina","Buenos Aires","Córdoba","Rosario","Mendoza"],
-"Colombia":["General Colombia","Bogotá","Medellín","Cali","Barranquilla"],
-"Chile":["General Chile","Santiago","Valparaíso","Concepción"],
-"Venezuela":["General Venezuela","Caracas","Maracaibo","Valencia"],
-"Perú":["General Perú","Lima","Arequipa","Trujillo"],
-"España":["General España","Madrid","Barcelona","Valencia","Sevilla"],
-"Estados Unidos":["General USA","Los Ángeles","Miami","Nueva York","Chicago"],
-"Centroamérica":["Guatemala","El Salvador","Honduras","Nicaragua","Costa Rica","Panamá"],
-"Otros países":["Europa","Asia","Canadá","Resto del mundo"],
-"Amistad":["Nuevas amistades","Amigos para siempre","Plática casual"],
-"Buscar pareja":["Hombres buscan mujeres","Mujeres buscan hombres","Conocer sin prisa"],
-"Solteros":["Solteros 20+","Solteros 30+","Solteros 40+"],
-"Romance":["Romance y poesía","Cartas de amor","Historias del corazón"],
-"Música":["De todo un poco","Rock","Pop","Electrónica","Música latina"],
-"Deportes":["Fútbol","Básquetbol","Boxeo","Deportes motor"],
-"Videojuegos":["Clásicos","PC y consola","Juegos en línea"],
-"Autos y motores":["Clásicos","Tuning","Arrancones y pista"],
-"Fútbol":["Liga MX","Fútbol internacional","Aficionados"],
-"Monterrey":["Regios general","San Nicolás","Apodaca","Guadalupe"],
-"La Máquina del Tiempo":["Años 80","Años 90","Años 2000"],
-"Generación MSN":["Recuerdos Messenger","Emoticones clásicos","Estados y zumbidos"],
-"Noches Retro":["Noctámbulos","Madrugada","Plática tranquila"],
-"Zona Gamer":["Retro gaming","PC Gaming","Consolas"],
-"Mundo Motor":["Clásicos","Tuning","Pista y carreras"],
-"Planeta Latino":["Cultura latina","Comida y costumbres","Viajeros"]
-};
-return map[room]||["General","Conocer gente","Plática y amistad"];
+  const map={
+    "México":["General México","Monterrey","CDMX","Guadalajara","Tijuana","Puebla","Veracruz","Norte","Sur"],
+    "Argentina":["General Argentina","Buenos Aires","Córdoba","Rosario","Mendoza"],
+    "Colombia":["General Colombia","Bogotá","Medellín","Cali","Barranquilla"],
+    "Chile":["General Chile","Santiago","Valparaíso","Concepción"],
+    "Venezuela":["General Venezuela","Caracas","Maracaibo","Valencia"],
+    "Perú":["General Perú","Lima","Arequipa","Trujillo"],
+    "España":["General España","Madrid","Barcelona","Valencia","Sevilla"],
+    "Estados Unidos":["General USA","Los Ángeles","Miami","Nueva York","Chicago"],
+    "Centroamérica":["Guatemala","El Salvador","Honduras","Nicaragua","Costa Rica","Panamá"],
+    "Otros países":["Europa","Asia","Canadá","Resto del mundo"],
+    "Amistad":["Nuevas amistades","Amigos para siempre","Plática casual"],
+    "Buscar pareja":["Hombres buscan mujeres","Mujeres buscan hombres","Conocer sin prisa"],
+    "Solteros":["Solteros 20+","Solteros 30+","Solteros 40+"],
+    "Romance":["Romance y poesía","Cartas de amor","Historias del corazón"],
+    "Música":["De todo un poco","Rock","Pop","Electrónica","Música latina"],
+    "Deportes":["Fútbol","Básquetbol","Boxeo","Deportes motor"],
+    "Videojuegos":["Clásicos","PC y consola","Juegos en línea"],
+    "Autos y motores":["Clásicos","Tuning","Arrancones y pista"],
+    "Fútbol":["Liga MX","Fútbol internacional","Aficionados"],
+    "Monterrey":["Regios general","San Nicolás","Apodaca","Guadalupe"],
+    "La Máquina del Tiempo":["Años 80","Años 90","Años 2000"],
+    "Generación MSN":["Recuerdos Messenger","Emoticones clásicos","Estados y zumbidos"],
+    "Noches Retro":["Noctámbulos","Madrugada","Plática tranquila"],
+    "Zona Gamer":["Retro gaming","PC Gaming","Consolas"],
+    "Mundo Motor":["Clásicos","Tuning","Pista y carreras"],
+    "Planeta Latino":["Cultura latina","Comida y costumbres","Viajeros"]
+  };
+  return map[room]||["General","Conocer gente","Plática y amistad"];
 }
 
 function openChat(room){
-currentRoom=room;
-$("chatTitle").textContent="# "+room;
-$("roomHeader").textContent="# "+room;
-$("chatCrumbCategory").textContent=currentCategory.title.replace(/^\S+\s/,"");
-$("chatCrumbRoom").textContent=room;
-$("chatLog").innerHTML='<div class="msg"><span class="time">Ahora</span><span class="nick">RETROCAOS:</span> Bienvenido a '+escapeHtml(room)+'. ¡Comienza la conversación!</div>';
-showView("chatView");
+  currentRoom=room;
+  $("chatTitle").textContent="# "+room;
+  $("roomHeader").textContent="# "+room;
+  $("chatCrumbCategory").textContent=currentCategory.title.replace(/^\S+\s/,"");
+  $("chatCrumbRoom").textContent=room;
+  $("chatLog").innerHTML=
+    '<div class="msg"><span class="time">Ahora</span><span class="nick">RETROCAOS:</span> Bienvenido a '+escapeHtml(room)+'. ¡Comienza la conversación!</div>';
+  showView("chatView");
 }
 
 function showView(id){
-["homeView","subView","chatView"].forEach(v=>$(v).classList.toggle("active",v===id));
-window.scrollTo({top:0,behavior:"smooth"});
+  ["homeView","subView","chatView"].forEach(v=>{
+    $(v).classList.toggle("active",v===id);
+  });
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function showHome(){showView("homeView")}
-function backToSubs(){openCategory(currentCategory,currentRoom)}
+function showHome(){showView("homeView");}
+function backToSubs(){openCategory(currentCategory,currentRoom);}
 
 function escapeHtml(s){
-return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  return s.replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
 }
 
 $("sendForm").addEventListener("submit",e=>{
-e.preventDefault();
-const nick=$("nick").value.trim()||"Invitado";
-const input=$("message");
-const msg=input.value.trim();
-if(!msg)return;
-const row=document.createElement("div");
-row.className="msg";
-const time=document.createElement("span");
-time.className="time";
-time.textContent=new Date().toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit"});
-const n=document.createElement("span");
-n.className="nick";
-n.textContent=nick+":";
-const m=document.createElement("span");
-m.textContent=" "+msg;
-row.append(time,n,m);
-$("chatLog").appendChild(row);
-$("chatLog").scrollTop=$("chatLog").scrollHeight;
-input.value="";
+  e.preventDefault();
+  const nick=$("nick").value.trim()||"Invitado";
+  const input=$("message");
+  const msg=input.value.trim();
+  if(!msg)return;
+
+  const row=document.createElement("div");
+  row.className="msg";
+
+  const time=document.createElement("span");
+  time.className="time";
+  time.textContent=new Date().toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit"});
+
+  const n=document.createElement("span");
+  n.className="nick";
+  n.textContent=nick+":";
+
+  const m=document.createElement("span");
+  m.textContent=" "+msg;
+
+  row.append(time,n,m);
+  $("chatLog").appendChild(row);
+  $("chatLog").scrollTop=$("chatLog").scrollHeight;
+  input.value="";
 });
 
 renderCategories();
