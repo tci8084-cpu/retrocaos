@@ -1,4 +1,6 @@
-<!doctype html>
+from pathlib import Path
+
+html = r'''<!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
@@ -6,73 +8,68 @@
 <title>RETROCAOS | El chat de toda la vida</title>
 <meta name="description" content="RETROCAOS: salas, amistad y conversaciones.">
 <style>
-:root{--blue:#087bd5;--deep:#082b59;--cyan:#42d9f5;--ink:#183553;--muted:#6c8299;--line:#d7e8f7}
+:root{--blue:#087bd5;--ink:#183553;--muted:#6c8299;--line:#d7e8f7}
 *{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;color:var(--ink);background:linear-gradient(145deg,#e8f6ff,#f8fbff 48%,#e5f2ff);min-height:100vh}
 .wrap{max-width:1180px;margin:auto;padding:18px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .brand{width:min(100%,530px);height:auto;display:block;filter:drop-shadow(0 8px 16px #164b7922)}.brand-fallback{display:none;font-size:clamp(30px,6vw,54px);font-weight:1000;letter-spacing:-2px;color:#087bd5;text-shadow:2px 3px 0 #fff,4px 5px 0 #83dff4}
 .actions{display:flex;gap:9px;flex-wrap:wrap}.btn{border:1px solid #b9d9f2;background:#fff;color:#145b91;padding:10px 15px;border-radius:12px;font-weight:bold;cursor:pointer;box-shadow:0 3px 10px #164b7910}.btn.primary{background:linear-gradient(135deg,#0785e7,#20b8e8);color:white;border:0}
 .intro{margin:16px 0 20px;padding:17px 20px;border:1px solid #d5e9fa;border-radius:18px;background:#ffffffb8;box-shadow:0 8px 25px #2c6a9710}.intro h1{font-size:22px;margin:0 0 6px;color:#125b98}.intro p{margin:0;color:#59758e}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px;text-align:center}.stat strong{display:block;font-size:25px;color:#087bd5}.stat span{font-size:12px;color:var(--muted)}
-.section-title{font-size:18px;color:#155d96;margin:22px 0 11px}.category{margin:14px 0 18px}.category h3{font-size:15px;color:#47708f;margin:0 0 9px}.rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:9px}
+.section-title{font-size:18px;color:#155d96;margin:22px 0 11px}.category{margin:14px 0 18px}.rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:9px}
 .room{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:13px;background:#ffffffd9;border:1px solid #d7e8f7;border-radius:13px;cursor:pointer;text-align:left;color:#234c70;box-shadow:0 3px 12px #174b7710}.room:hover{border-color:#56b9ec;background:#eaf8ff}.room small{display:block;color:#8297a9;font-size:11px;margin-top:4px}.count{font-size:12px;color:#13845f;white-space:nowrap}
 .view{display:none}.view.active{display:block}.back{margin:4px 0 16px}.crumb{font-size:12px;color:#66839d;margin:8px 0 14px}.sub-intro{padding:17px;border-radius:16px;background:#ffffffc9;border:1px solid var(--line);margin-bottom:16px}.sub-intro h2{margin:0 0 6px;color:#155d96}.sub-intro p{margin:0;color:#68839a}
 .columns{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(240px,.8fr);gap:14px;margin-top:16px}.panel{background:#fff;border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 6px 20px #164b790c}.panel-head{padding:13px 16px;background:linear-gradient(90deg,#e9f6ff,#f7fbff);border-bottom:1px solid var(--line);font-weight:bold;color:#155d96;display:flex;justify-content:space-between;gap:10px}
 .chat-log{height:310px;overflow:auto;padding:14px;background:linear-gradient(#fff,#f9fcff)}.msg{padding:8px 0;border-bottom:1px solid #eef4fa;font-size:14px;line-height:1.45}.time{color:#9aabba;font-size:11px;margin-right:7px}.nick{font-weight:bold;color:#087bd5;margin-right:6px}
 .send{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}input{min-width:0;border:1px solid #cbdfee;border-radius:10px;padding:11px;font:inherit;background:white;color:var(--ink)}input.nick-input{width:150px}input.message-input{flex:1}
-.user-list{padding:12px}.user{padding:9px 4px;border-bottom:1px solid #eff4f8;font-size:13px}.online-dot{display:inline-block;width:8px;height:8px;background:#25b77b;border-radius:50%;margin-right:8px}
-.notice{font-size:12px;color:#9a6b22;background:#fff8e8;border:1px solid #f1dfb8;border-radius:10px;padding:10px;margin-top:16px}.footer{margin:22px 0 8px;padding:17px;text-align:center;border:1px solid var(--line);border-radius:16px;background:#ffffffc9;color:#6b8399;font-size:12px}
+.user-list{padding:12px}.notice{font-size:12px;color:#9a6b22;background:#fff8e8;border:1px solid #f1dfb8;border-radius:10px;padding:10px;margin-top:16px}.footer{margin:22px 0 8px;padding:17px;text-align:center;border:1px solid var(--line);border-radius:16px;background:#ffffffc9;color:#6b8399;font-size:12px}
 .status{font-size:12px;color:#54758e;margin:10px 0}.status.error{color:#a43d32}.empty{padding:18px;border:1px dashed #bdd5e8;border-radius:12px;color:#68839a;background:#fff}
+.modal-backdrop{display:none;position:fixed;inset:0;background:#082b59aa;z-index:50;align-items:center;justify-content:center;padding:16px}.modal-backdrop.show{display:flex}.auth-box{width:min(100%,430px);background:#fff;border:1px solid #cfe3f4;border-radius:18px;padding:22px;box-shadow:0 20px 60px #082b5940}.auth-box h2{margin:0 0 8px;color:#155d96}.auth-box p{color:#68839a;font-size:13px}.auth-box label{display:block;font-size:13px;font-weight:bold;margin:12px 0 5px}.auth-box input{width:100%}.auth-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.auth-message{font-size:13px;min-height:18px;margin-top:12px;color:#155d96}.auth-message.error{color:#a43d32}.auth-message.success{color:#13845f}.auth-close{float:right}
 @media(max-width:760px){.columns{grid-template-columns:1fr}.stats{gap:7px}.stat{padding:10px 5px}.stat strong{font-size:21px}.wrap{padding:11px}.brand{max-width:100%}.intro h1{font-size:19px}.send{flex-wrap:wrap}.send input.message-input{flex-basis:100%;order:2}.send button{order:3}.send input.nick-input{flex:1}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header class="top">
-  <div>
-    <img class="brand" src="retrocaos-logo.png" alt="RETROCAOS - El chat de toda la vida" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-    <div class="brand-fallback">RETROCAOS</div>
-  </div>
-  <div class="actions"><button class="btn" onclick="alert('El registro se activará en la siguiente etapa de conexión.')">Crear cuenta</button><button class="btn primary" onclick="showHome();document.getElementById('roomDirectory').scrollIntoView({behavior:'smooth'})">Entrar al chat</button></div>
-</header>
-<section class="intro"><h1>¡Volvió el chat de toda la vida!</h1><p>Entra, elige una categoría, descubre sus sub salas y encuentra tu conversación.</p></section>
+<header class="top"><div><img class="brand" src="retrocaos-logo.png" alt="RETROCAOS - El chat de toda la vida" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="brand-fallback">RETROCAOS</div></div>
+<div class="actions"><button class="btn" id="registerOpen">Crear cuenta</button><button class="btn" id="loginOpen">Iniciar sesión</button><button class="btn" id="guestOpen">Entrar como invitado</button><button class="btn" id="logoutButton" style="display:none">Cerrar sesión</button><button class="btn primary" onclick="showHome();document.getElementById('roomDirectory').scrollIntoView({behavior:'smooth'})">Entrar al chat</button></div></header>
+<section class="intro"><h1>¡Volvió el chat de toda la vida!</h1><p>Entra, elige una categoría, descubre sus sub salas y encuentra tu conversación.</p><p id="accountStatus" class="status">No has iniciado sesión. Puedes entrar como invitado.</p></section>
 <section class="stats"><div class="stat"><strong>—</strong><span>Visitas acumuladas</span></div><div class="stat"><strong>—</strong><span>Conectados ahora</span></div><div class="stat"><strong>—</strong><span>Récord simultáneo</span></div></section>
 <section id="homeView" class="view active"><h2 class="section-title">Directorio de categorías</h2><div id="connectionStatus" class="status">Conectando con RETROCAOS…</div><div id="roomDirectory"></div></section>
 <section id="subView" class="view"><button class="btn back" onclick="showHome()">← Volver al inicio</button><div class="crumb">RETROCAOS / <span id="crumbCategory"></span></div><div class="sub-intro"><h2 id="subTitle"></h2><p>Selecciona una sala para entrar a conversar.</p></div><div id="subDirectory"></div></section>
 <section id="chatView" class="view"><button class="btn back" onclick="backToSubs()">← Volver a las salas</button><div class="crumb">RETROCAOS / <span id="chatCrumbCategory"></span> / <span id="chatCrumbRoom"></span></div><div class="sub-intro"><h2 id="chatTitle"># Sala</h2><p>Bienvenido. Esta es la pantalla individual de la sala.</p></div><div class="columns"><section class="panel"><div class="panel-head"><span id="roomHeader"># Sala</span><span>● Vista de demostración</span></div><div class="chat-log" id="chatLog"><div class="msg"><span class="time">Ahora</span><span class="nick">RETROCAOS:</span> ¡Bienvenido! La conexión del chat en vivo se configurará después.</div></div><form class="send" id="sendForm"><input class="nick-input" id="nick" maxlength="22" placeholder="Tu apodo" aria-label="Tu apodo"><input class="message-input" id="message" maxlength="400" placeholder="Escribe un mensaje..." aria-label="Mensaje" required><button class="btn primary" type="submit">Enviar</button></form></section><aside class="panel"><div class="panel-head">Usuarios en la sala</div><div class="user-list"><div class="empty">La presencia de usuarios se conectará en la siguiente etapa.</div></div></aside></div></section>
-<div class="notice">Directorio conectado a Supabase. El envío de mensajes, usuarios conectados, registro y mensajes privados todavía no están activos.</div>
-<footer class="footer">RETROCAOS · El chat de toda la vida · Comunidad abierta</footer>
-</div>
+<div class="notice">Directorio conectado a Supabase. Registro e inicio de sesión conectados; chat en vivo, usuarios conectados y mensajes privados pendientes.</div><footer class="footer">RETROCAOS · El chat de toda la vida · Comunidad abierta</footer></div>
+<div class="modal-backdrop" id="authModal" role="dialog" aria-modal="true"><div class="auth-box"><button class="btn auth-close" id="authClose">Cerrar</button><h2 id="authTitle">Crear cuenta</h2><p id="authDescription">Regístrate con tu correo y una contraseña.</p><form id="authForm"><div id="nicknameField"><label for="authNickname">Apodo</label><input id="authNickname" maxlength="22" autocomplete="nickname" placeholder="Tu apodo"></div><label for="authEmail">Correo electrónico</label><input id="authEmail" type="email" autocomplete="email" placeholder="tucorreo@ejemplo.com" required><label for="authPassword">Contraseña</label><input id="authPassword" type="password" minlength="8" autocomplete="new-password" placeholder="Mínimo 8 caracteres" required><div class="auth-actions"><button class="btn primary" id="authSubmit" type="submit">Crear cuenta</button><button class="btn" type="button" id="switchAuth">Ya tengo cuenta</button></div></form><div class="auth-message" id="authMessage" aria-live="polite"></div></div></div>
 <script>
-// Configuración pública del proyecto. Nunca colocar aquí una clave sb_secret_ o service_role.
-const SUPABASE_URL = 'https://ijbuvhkqmziuxkioxknd.supabase.co';
-const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_ewIbuvw-OR-h44uRG3j8OQ_rveSQ8lo';
-const API = `${SUPABASE_URL}/rest/v1`;
-let categories = [], currentCategory = null, currentRoom = null;
-const $ = id => document.getElementById(id);
-function setStatus(message, error=false){const el=$('connectionStatus');el.textContent=message;el.className='status'+(error?' error':'')}
-async function apiGet(table, query){
-  const response = await fetch(`${API}/${table}?${query}`, {headers:{'apikey':SUPABASE_PUBLISHABLE_KEY,'Authorization':`Bearer ${SUPABASE_PUBLISHABLE_KEY}`,'Accept':'application/json'}});
-  if(!response.ok){const detail=await response.text();throw new Error(`${response.status}: ${detail}`)}
-  return response.json();
-}
-function makeButton(name, small, fn){const b=document.createElement('button');b.className='room';const label=document.createElement('span');label.textContent=name;const sub=document.createElement('small');sub.textContent=small;label.appendChild(sub);const arrow=document.createElement('span');arrow.className='count';arrow.textContent='›';b.append(label,arrow);b.addEventListener('click',fn);return b}
-async function loadCategories(){
-  setStatus('Conectando con Supabase…');
-  try{
-    categories=await apiGet('room_categories','select=id,name,slug,description&active=eq.true&order=id.asc');
-    if(!categories.length){setStatus('Todavía no hay categorías activas.',true);return}
-    renderCategories();setStatus(`Conectado: ${categories.length} categorías disponibles.`);
-  }catch(error){console.error(error);setStatus('No se pudo cargar el directorio. Revisa las políticas RLS y la conexión de Supabase. '+error.message,true);$('roomDirectory').innerHTML='<div class="empty">No fue posible obtener las categorías desde Supabase.</div>'}
-}
+const SUPABASE_URL='https://ijbuvhkqmziuxkioxknd.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY='sb_publishable_ewIbuvw-OR-h44uRG3j8OQ_rveSQ8lo';
+const API=`${SUPABASE_URL}/rest/v1`, AUTH=`${SUPABASE_URL}/auth/v1`;
+let categories=[],currentCategory=null,currentRoom=null,authMode='signup';
+const $=id=>document.getElementById(id);
+function setStatus(message,error=false){const el=$('connectionStatus');el.textContent=message;el.className='status'+(error?' error':'')}
+async function apiGet(table,query){const r=await fetch(`${API}/${table}?${query}`,{headers:{apikey:SUPABASE_PUBLISHABLE_KEY,Authorization:`Bearer ${SUPABASE_PUBLISHABLE_KEY}`,Accept:'application/json'}});if(!r.ok)throw new Error(`${r.status}: ${await r.text()}`);return r.json()}
+function makeButton(name,small,fn){const b=document.createElement('button');b.className='room';const label=document.createElement('span');label.textContent=name;const sub=document.createElement('small');sub.textContent=small;label.appendChild(sub);const arrow=document.createElement('span');arrow.className='count';arrow.textContent='›';b.append(label,arrow);b.addEventListener('click',fn);return b}
+async function loadCategories(){setStatus('Conectando con Supabase…');try{categories=await apiGet('room_categories','select=id,name,slug,description&active=eq.true&order=id.asc');if(!categories.length){setStatus('Todavía no hay categorías activas.',true);return}renderCategories();setStatus(`Conectado: ${categories.length} categorías disponibles.`)}catch(e){console.error(e);setStatus('No se pudo cargar el directorio. '+e.message,true);$('roomDirectory').innerHTML='<div class="empty">No fue posible obtener las categorías desde Supabase.</div>'}}
 function renderCategories(){const root=$('roomDirectory');root.innerHTML='';categories.forEach(cat=>{const section=document.createElement('section');section.className='category';const grid=document.createElement('div');grid.className='rooms';grid.appendChild(makeButton(cat.name,cat.description||'Ver salas',()=>openCategory(cat)));section.appendChild(grid);root.appendChild(section)})}
-async function openCategory(cat){currentCategory=cat;currentRoom=null;$('subTitle').textContent=cat.name;$('crumbCategory').textContent=cat.name;const root=$('subDirectory');root.innerHTML='<div class="empty">Cargando salas…</div>';showView('subView');try{const rooms=await apiGet('rooms',`select=id,name,slug,description&category_id=eq.${encodeURIComponent(cat.id)}&active=eq.true&order=id.asc`);root.innerHTML='';if(!rooms.length){root.innerHTML='<div class="empty">Esta categoría todavía no tiene salas activas.</div>';return}const grid=document.createElement('div');grid.className='rooms';rooms.forEach(room=>grid.appendChild(makeButton(room.name,room.description||'Entrar al chat',()=>openChat(room))));root.appendChild(grid)}catch(error){console.error(error);root.innerHTML='<div class="empty">No se pudieron cargar las salas. '+escapeHtml(error.message)+'</div>'}}
-function openChat(room){currentRoom=room;$('chatTitle').textContent='# '+room.name;$('roomHeader').textContent='# '+room.name;$('chatCrumbCategory').textContent=currentCategory?.name||'';$('chatCrumbRoom').textContent=room.name;$('chatLog').innerHTML='<div class="msg"><span class="time">Ahora</span><span class="nick">RETROCAOS:</span> Bienvenido a '+escapeHtml(room.name)+'. El chat en vivo se activará en la siguiente etapa.</div>';showView('chatView')}
+async function openCategory(cat){currentCategory=cat;currentRoom=null;$('subTitle').textContent=cat.name;$('crumbCategory').textContent=cat.name;const root=$('subDirectory');root.innerHTML='<div class="empty">Cargando salas…</div>';showView('subView');try{const rooms=await apiGet('rooms',`select=id,name,slug,description&category_id=eq.${encodeURIComponent(cat.id)}&active=eq.true&order=id.asc`);root.innerHTML='';if(!rooms.length){root.innerHTML='<div class="empty">Esta categoría todavía no tiene salas activas.</div>';return}const grid=document.createElement('div');grid.className='rooms';rooms.forEach(room=>grid.appendChild(makeButton(room.name,room.description||'Entrar al chat',()=>openChat(room))));root.appendChild(grid)}catch(e){console.error(e);root.innerHTML='<div class="empty">No se pudieron cargar las salas. '+escapeHtml(e.message)+'</div>'}}
+function openChat(room){currentRoom=room;$('chatTitle').textContent='# '+room.name;$('roomHeader').textContent='# '+room.name;$('chatCrumbCategory').textContent=currentCategory?.name||'';$('chatCrumbRoom').textContent=room.name;$('chatLog').innerHTML='<div class="msg"><span class="time">Ahora</span><span class="nick">RETROCAOS:</span> Bienvenido a '+escapeHtml(room.name)+'. El chat en vivo se activará después.</div>';showView('chatView')}
 function showView(id){['homeView','subView','chatView'].forEach(v=>$(v).classList.toggle('active',v===id));window.scrollTo({top:0,behavior:'smooth'})}
-function showHome(){showView('homeView')}
-function backToSubs(){if(currentCategory)openCategory(currentCategory)}
+function showHome(){showView('homeView')}function backToSubs(){if(currentCategory)openCategory(currentCategory)}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-$('sendForm').addEventListener('submit',e=>{e.preventDefault();alert('El chat todavía no está conectado. En esta etapa estamos conectando el directorio de salas.');$('message').value='' });
-loadCategories();
+function getSession(){try{return JSON.parse(localStorage.getItem('retrocaos_session')||'null')}catch{return null}}
+function saveSession(data){if(data?.access_token)localStorage.setItem('retrocaos_session',JSON.stringify(data))}
+function updateAccountUI(){const s=getSession();$('logoutButton').style.display=s?'inline-block':'none';$('loginOpen').style.display=s?'none':'inline-block';$('registerOpen').style.display=s?'none':'inline-block';$('accountStatus').textContent=s?.user?.email?'Sesión iniciada: '+s.user.email+'.':s?.guest?'Entraste como invitado: '+s.guest+'.':'No has iniciado sesión. Puedes entrar como invitado.'}
+function showAuth(mode){authMode=mode;$('authTitle').textContent=mode==='signup'?'Crear cuenta':mode==='login'?'Iniciar sesión':'Entrar como invitado';$('authDescription').textContent=mode==='signup'?'Regístrate con tu apodo, correo y contraseña.':mode==='login'?'Ingresa tu correo y contraseña.':'Elige un apodo para entrar sin registrarte.';$('nicknameField').style.display=mode==='signup'||mode==='guest'?'block':'none';$('authEmail').style.display=mode==='guest'?'none':'block';$('authPassword').style.display=mode==='guest'?'none':'block';document.querySelector('label[for="authEmail"]').style.display=mode==='guest'?'none':'block';document.querySelector('label[for="authPassword"]').style.display=mode==='guest'?'none':'block';$('authEmail').required=mode!=='guest';$('authPassword').required=mode!=='guest';$('authSubmit').textContent=mode==='signup'?'Crear cuenta':mode==='login'?'Iniciar sesión':'Entrar';$('switchAuth').style.display=mode==='guest'?'none':'inline-block';$('switchAuth').textContent=mode==='signup'?'Ya tengo cuenta':'Crear cuenta';$('authPassword').autocomplete=mode==='login'?'current-password':'new-password';$('authMessage').textContent='';$('authMessage').className='auth-message';$('authModal').classList.add('show')}
+function closeAuth(){$('authModal').classList.remove('show')}
+function authMessage(t,type=''){$('authMessage').textContent=t;$('authMessage').className='auth-message '+type}
+async function authRequest(path,body){const r=await fetch(`${AUTH}/${path}`,{method:'POST',headers:{'Content-Type':'application/json',apikey:SUPABASE_PUBLISHABLE_KEY},body:JSON.stringify(body)});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.msg||d.message||d.error_description||d.error||'No se pudo completar la solicitud.');return d}
+$('registerOpen').onclick=()=>showAuth('signup');$('loginOpen').onclick=()=>showAuth('login');$('guestOpen').onclick=()=>showAuth('guest');$('authClose').onclick=closeAuth;$('authModal').addEventListener('click',e=>{if(e.target===$('authModal'))closeAuth()});$('switchAuth').onclick=()=>showAuth(authMode==='signup'?'login':'signup');
+$('authForm').addEventListener('submit',async e=>{e.preventDefault();const nick=$('authNickname').value.trim(),email=$('authEmail').value.trim(),password=$('authPassword').value;$('authSubmit').disabled=true;try{if(authMode==='guest'){if(nick.length<3)throw new Error('El apodo debe tener al menos 3 caracteres.');localStorage.setItem('retrocaos_session',JSON.stringify({guest:nick,created_at:new Date().toISOString()}));updateAccountUI();closeAuth();return}if(authMode==='signup'){if(nick.length<3)throw new Error('El apodo debe tener al menos 3 caracteres.');const d=await authRequest('signup',{email,password,data:{nickname:nick}});if(d.access_token){saveSession(d);updateAccountUI();authMessage('Cuenta creada y sesión iniciada.','success')}else authMessage('Cuenta creada. Revisa tu correo y confirma la dirección antes de iniciar sesión.','success')}else{const d=await authRequest('token?grant_type=password',{email,password});saveSession(d);updateAccountUI();authMessage('Sesión iniciada correctamente.','success');setTimeout(closeAuth,900)}}catch(err){authMessage(err.message,'error')}finally{$('authSubmit').disabled=false}});
+$('logoutButton').onclick=async()=>{const s=getSession();if(s?.access_token){try{await fetch(`${AUTH}/logout`,{method:'POST',headers:{apikey:SUPABASE_PUBLISHABLE_KEY,Authorization:'Bearer '+s.access_token}})}catch(e){console.warn(e)}}localStorage.removeItem('retrocaos_session');updateAccountUI()};
+$('sendForm').addEventListener('submit',e=>{e.preventDefault();alert('El chat todavía no está conectado. El envío de mensajes se activará en otra etapa.');$('message').value=''});
+updateAccountUI();loadCategories();
 </script>
 </body>
-</html>
+</html>'''
+
+path = Path("/mnt/data/RETROCAOS-index-registro-invitados.html")
+path.write_text(html, encoding="utf-8")
+print(f"Archivo creado: {path}")
